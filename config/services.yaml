@@ -1,0 +1,172 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    # Providers
+    Symfinity\FontManager\Provider\GoogleFontsProvider:
+        arguments:
+            $httpClient: '@http_client'
+            $config: '%font_manager.providers.google%'
+
+    Symfinity\FontManager\Provider\BunnyFontsProvider:
+        arguments:
+            $httpClient: '@http_client'
+            $config: '%font_manager.providers.bunny%'
+
+    Symfinity\FontManager\Provider\FontsourceProvider:
+        arguments:
+            $httpClient: '@http_client'
+            $config: '%font_manager.providers.fontsource%'
+
+    Symfinity\FontManager\Provider\LocalFontsProvider:
+        arguments:
+            $httpClient: '@http_client'
+            $config: '%font_manager.providers.local%'
+
+    # Provider Registry
+    Symfinity\FontManager\Provider\ProviderRegistry:
+        arguments:
+            $defaultProvider: '%font_manager.default_provider%'
+        calls:
+            - registerProvider: ['@Symfinity\FontManager\Provider\GoogleFontsProvider']
+            - registerProvider: ['@Symfinity\FontManager\Provider\BunnyFontsProvider']
+            - registerProvider: ['@Symfinity\FontManager\Provider\FontsourceProvider']
+            - registerProvider: ['@Symfinity\FontManager\Provider\LocalFontsProvider']
+
+    # Services
+    Symfinity\FontManager\Service\FontDownloader:
+        arguments:
+            $fontsDir: '%font_manager.fonts_dir%'
+            $httpClient: '@http_client'
+            $providerRegistry: '@Symfinity\FontManager\Provider\ProviderRegistry'
+            $filesystem: '@filesystem'
+            $unicodeSubsets: '%font_manager.unicode_subsets%'
+
+    Symfinity\FontManager\Service\FontLockManager:
+        arguments:
+            $manifestFile: '%font_manager.manifest_file%'
+            $fontDownloader: '@Symfinity\FontManager\Service\FontDownloader'
+            $filesystem: '@filesystem'
+
+    # Twig Extension
+    Symfinity\FontManager\Twig\FontManagerExtension:
+        tags: ['twig.extension']
+
+    Symfinity\FontManager\Twig\FontManagerRuntime:
+        arguments:
+            $providerRegistry: '@Symfinity\FontManager\Provider\ProviderRegistry'
+            $useLockedFonts: '%font_manager.use_locked_fonts%'
+            $manifestFile: '%font_manager.manifest_file%'
+            $filesystem: '@filesystem'
+            $performanceOptimizer: '@Symfinity\FontManager\Service\Performance\FontPerformanceOptimizer'
+            $fallbackGenerator: '@Symfinity\FontManager\Service\Fallback\FontFallbackGenerator'
+            $variableFontDetector: '@Symfinity\FontManager\Service\VariableFonts\VariableFontDetector'
+            $fontLoadingApi: '@Symfinity\FontManager\Service\Performance\FontLoadingApi'
+            $enableResourceHints: '%font_manager.performance.resource_hints%'
+            $enableIntelligentFallbacks: '%font_manager.performance.intelligent_fallbacks%'
+        tags: ['twig.runtime']
+
+    # Commands (explicit configuration for string parameters)
+    Symfinity\FontManager\Command\FontsLockCommand:
+        arguments:
+            $projectDir: '%kernel.project_dir%'
+            $formatAutoDetector: '@Symfinity\FontManager\Service\FormatAutoDetector'
+            $params: '@parameter_bag'
+        tags: ['console.command']
+
+    Symfinity\FontManager\Command\FontsStatusCommand:
+        arguments:
+            $manifestFile: '%font_manager.manifest_file%'
+        tags: ['console.command']
+
+    Symfinity\FontManager\Command\FontsPruneCommand:
+        arguments:
+            $manifestFile: '%font_manager.manifest_file%'
+            $fontsDir: '%font_manager.fonts_dir%'
+        tags: ['console.command']
+
+    Symfinity\FontManager\Command\MigrateFromGoogleFontsCommand:
+        arguments:
+            $projectDir: '%kernel.project_dir%'
+        tags: ['console.command']
+
+    # Commands with only service dependencies (autowired)
+    Symfinity\FontManager\Command\FontsSearchCommand:
+        tags: ['console.command']
+
+    Symfinity\FontManager\Command\FontsValidateCommand:
+        tags: ['console.command']
+
+    # Exporters - CSS
+    Symfinity\FontManager\Exporter\Css\CssVariablesExporter: ~
+    Symfinity\FontManager\Exporter\Css\CssModulesExporter: ~
+    Symfinity\FontManager\Exporter\Css\CssLayerExporter: ~
+
+    # Exporters - SCSS
+    Symfinity\FontManager\Exporter\Scss\ScssVariablesExporter: ~
+    Symfinity\FontManager\Exporter\Scss\ScssBootstrapExporter: ~
+    Symfinity\FontManager\Exporter\Scss\ScssMixinsExporter: ~
+
+    # Exporters - JavaScript
+    Symfinity\FontManager\Exporter\JavaScript\EsmExporter: ~
+    Symfinity\FontManager\Exporter\JavaScript\TailwindConfigExporter: ~
+    Symfinity\FontManager\Exporter\JavaScript\TypeScriptExporter: ~
+
+    # Exporters - Design System
+    Symfinity\FontManager\Exporter\DesignSystem\JsonExporter: ~
+    Symfinity\FontManager\Exporter\DesignSystem\DesignTokensExporter: ~
+    Symfinity\FontManager\Exporter\DesignSystem\FigmaTokensExporter: ~
+    Symfinity\FontManager\Exporter\DesignSystem\StyleDictionaryExporter: ~
+
+    # Exporter Registry
+    Symfinity\FontManager\Exporter\ExporterRegistry:
+        calls:
+            - register: ['@Symfinity\FontManager\Exporter\Css\CssVariablesExporter']
+            - register: ['@Symfinity\FontManager\Exporter\Css\CssModulesExporter']
+            - register: ['@Symfinity\FontManager\Exporter\Css\CssLayerExporter']
+            - register: ['@Symfinity\FontManager\Exporter\Scss\ScssVariablesExporter']
+            - register: ['@Symfinity\FontManager\Exporter\Scss\ScssBootstrapExporter']
+            - register: ['@Symfinity\FontManager\Exporter\Scss\ScssMixinsExporter']
+            - register: ['@Symfinity\FontManager\Exporter\JavaScript\EsmExporter']
+            - register: ['@Symfinity\FontManager\Exporter\JavaScript\TailwindConfigExporter']
+            - register: ['@Symfinity\FontManager\Exporter\JavaScript\TypeScriptExporter']
+            - register: ['@Symfinity\FontManager\Exporter\DesignSystem\JsonExporter']
+            - register: ['@Symfinity\FontManager\Exporter\DesignSystem\DesignTokensExporter']
+            - register: ['@Symfinity\FontManager\Exporter\DesignSystem\FigmaTokensExporter']
+            - register: ['@Symfinity\FontManager\Exporter\DesignSystem\StyleDictionaryExporter']
+
+    # Build Tool Detection & Orchestration
+    Symfinity\FontManager\Service\BuildToolDetector: ~
+
+    Symfinity\FontManager\Service\FormatAutoDetector: ~
+
+    Symfinity\FontManager\Service\ExporterOrchestrator:
+        arguments:
+            $registry: '@Symfinity\FontManager\Exporter\ExporterRegistry'
+            $filesystem: '@filesystem'
+
+    # Performance Services
+    Symfinity\FontManager\Service\Performance\FontPerformanceOptimizer: ~
+    Symfinity\FontManager\Service\Performance\FontLoadingApi: ~
+    Symfinity\FontManager\Service\Performance\CriticalFontExtractor: ~
+
+    # Variable Fonts Services
+    Symfinity\FontManager\Service\VariableFonts\VariableFontDetector: ~
+
+    # Fallback Services
+    Symfinity\FontManager\Service\Fallback\FontFallbackGenerator: ~
+
+    # New Export Commands
+    Symfinity\FontManager\Command\FontsExportCommand:
+        arguments:
+            $projectDir: '%kernel.project_dir%'
+            $formatAutoDetector: '@Symfinity\FontManager\Service\FormatAutoDetector'
+        tags: ['console.command']
+
+    Symfinity\FontManager\Command\FontsFormatsCommand:
+        tags: ['console.command']
+
+    Symfinity\FontManager\Command\FontsFormatInfoCommand:
+        tags: ['console.command']
+
