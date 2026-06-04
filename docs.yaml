@@ -1,0 +1,33 @@
+composer_name: symfinity/font-manager
+package_major: "1.x"
+
+sidebar:
+  - commands
+  - configuration
+  - installation
+  - quickstart
+  - reference
+  - troubleshooting
+  - upgrade
+  - usage
+
+slices:
+  - symfony: "7.4"
+    sources:
+      - commands.md
+      - configuration.md
+      - exporter-policy.md
+      - exports.md
+      - index.md
+      - installation.md
+      - local-fonts.md
+      - m4-public-release-checklist.md
+      - migration-from-google-fonts.md
+      - migration.md
+      - performance.md
+      - providers.md
+      - quickstart.md
+      - reference.md
+      - troubleshooting.md
+      - upgrade.md
+      - usage.md

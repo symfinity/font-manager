@@ -2,7 +2,7 @@
 
 **Status:** Scheduled — execute **before or with** the first public `symfinity/symfinity` product release.  
 **Intake port track:** M0–M3 **done** (2026-05-31). **No blockers** for M4 timing.  
-**Program:** [wave-1 migration](../../../../../classified/explore/ORG-neuralglitch-packagist-wave-1-migration.md)
+**Program:** wave-1 migration
 
 Wave-1 **font-manager** M4 runs in the **same release batch** as `symfinity/omnia-ipsum` and other first-public V0 utilities — not as a standalone early abandon.
 

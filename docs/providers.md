@@ -249,4 +249,3 @@ For more information:
 - [Usage Guide](usage.md)
 - [Commands Reference](commands.md)
 - [Configuration](configuration.md)
-

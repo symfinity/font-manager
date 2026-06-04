@@ -1100,4 +1100,3 @@ The system automatically resolves dependencies!
 - [Configuration Reference](configuration.md) - Full configuration options
 - [Commands Reference](commands.md) - All CLI commands
 - [Usage Guide](usage.md) - Twig function usage
-

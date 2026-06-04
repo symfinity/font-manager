@@ -136,4 +136,3 @@ Use browser DevTools to measure font loading performance:
 - [Usage Guide](usage.md) - Basic font usage
 - [Configuration](configuration.md) - All configuration options
 - [Export Formats](exports.md) - Multi-format export system
-
