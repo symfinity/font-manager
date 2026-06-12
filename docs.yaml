@@ -1,5 +1,5 @@
 composer_name: symfinity/font-manager
-package_major: "1.x"
+package_major: "0.2"
 
 sidebar:
   - commands
@@ -21,7 +21,6 @@ slices:
       - index.md
       - installation.md
       - local-fonts.md
-      - m4-public-release-checklist.md
       - migration-from-google-fonts.md
       - migration.md
       - performance.md

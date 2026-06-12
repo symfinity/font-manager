@@ -1,4 +1,3 @@
-# Recipe-aligned defaults (Flex copies recipes/symfinity/font-manager/0.1/config/packages/font_manager.yaml)
 font_manager:
     default_provider: google
     unicode_subsets: ['latin', 'latin-ext']

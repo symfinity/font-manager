@@ -1,0 +1,50 @@
+name: CI
+
+# R1 relocation matrix: PHP 8.1 x Symfony 6.4.* only.
+# Next patch: expand to PHP 8.2-8.5 x Symfony 6.4.*/7.4.*/8.1.* (8.1 on PHP 8.4+ jobs only).
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  qa:
+    name: PHPUnit + PHPStan (PHP 8.1, Symfony 6.4.*)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          extensions: mbstring, xml, ctype, iconv, intl, curl
+          coverage: none
+          tools: composer:v2
+
+      - name: Pin Symfony 6.4
+        run: |
+          composer require --no-update \
+            symfony/config:^6.4 \
+            symfony/console:^6.4 \
+            symfony/dependency-injection:^6.4 \
+            symfony/filesystem:^6.4 \
+            symfony/finder:^6.4 \
+            symfony/http-client:^6.4 \
+            symfony/http-kernel:^6.4 \
+            symfony/routing:^6.4 \
+            symfony/twig-bundle:^6.4 \
+            symfony/asset-mapper:^6.4 \
+            symfony/yaml:^6.4
+
+      - name: Install dependencies
+        run: composer update --prefer-dist --no-interaction --no-progress
+
+      - name: PHPUnit
+        run: vendor/bin/phpunit --colors=always
+
+      - name: PHPStan
+        run: vendor/bin/phpstan analyse --memory-limit=512M
