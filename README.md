@@ -4,7 +4,7 @@
 
 ### Universal font manager for Symfony supporting multiple providers
 
-[![PHP Version](https://img.shields.io/badge/PHP-8.1+-777BB4?style=flat&logo=php&logoColor=white)](composer.json)
+[![PHP Version](https://img.shields.io/badge/PHP-8.2+-777BB4?style=flat&logo=php&logoColor=white)](composer.json)
 [![Symfony](https://img.shields.io/badge/Symfony-6.4+-343434?style=flat&logo=symfony&logoColor=white)](composer.json)
 <br/>
 [![CI](https://github.com/symfinity/font-manager/actions/workflows/ci.yml/badge.svg)](https://github.com/symfinity/font-manager/actions/workflows/ci.yml)
