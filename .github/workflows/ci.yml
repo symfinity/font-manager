@@ -1,7 +1,7 @@
 name: CI
 
-# R1 relocation matrix: PHP 8.1 x Symfony 6.4.* only.
-# Next patch: expand to PHP 8.2-8.5 x Symfony 6.4.*/7.4.*/8.1.* (8.1 on PHP 8.4+ jobs only).
+# Matrix: maintained PHP x maintained Symfony (floor 6.4.*).
+# Regenerated 2026-06-13 — refresh: split-mirror-docs/scripts/fetch-ci-matrix.sh --gha-json --package-php='>=8.2'
 
 on:
   push:
@@ -11,34 +11,47 @@ on:
 
 jobs:
   qa:
-    name: PHPUnit + PHPStan (PHP 8.1, Symfony 6.4.*)
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { php: '8.2', symfony: '6.4' }
+          - { php: '8.3', symfony: '6.4' }
+          - { php: '8.4', symfony: '6.4' }
+          - { php: '8.5', symfony: '6.4' }
+          - { php: '8.2', symfony: '7.4' }
+          - { php: '8.3', symfony: '7.4' }
+          - { php: '8.4', symfony: '7.4' }
+          - { php: '8.5', symfony: '7.4' }
+          - { php: '8.4', symfony: '8.0' }
+          - { php: '8.5', symfony: '8.0' }
+          - { php: '8.4', symfony: '8.1' }
+          - { php: '8.5', symfony: '8.1' }
+
+    name: PHPUnit + PHPStan (PHP ${{ matrix.php }}, Symfony ${{ matrix.symfony }}.*)
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'
+          php-version: ${{ matrix.php }}
           extensions: mbstring, xml, ctype, iconv, intl, curl
           coverage: none
           tools: composer:v2
 
-      - name: Pin Symfony 6.4
+      - name: Pin Symfony ${{ matrix.symfony }}
         run: |
           composer require --no-update \
-            symfony/config:^6.4 \
-            symfony/console:^6.4 \
-            symfony/dependency-injection:^6.4 \
-            symfony/filesystem:^6.4 \
-            symfony/finder:^6.4 \
-            symfony/http-client:^6.4 \
-            symfony/http-kernel:^6.4 \
-            symfony/routing:^6.4 \
-            symfony/twig-bundle:^6.4 \
-            symfony/asset-mapper:^6.4 \
-            symfony/yaml:^6.4
+            symfony/config:^${{ matrix.symfony }} \
+            symfony/dependency-injection:^${{ matrix.symfony }} \
+            symfony/framework-bundle:^${{ matrix.symfony }} \
+            symfony/http-foundation:^${{ matrix.symfony }} \
+            symfony/http-kernel:^${{ matrix.symfony }} \
+            symfony/twig-bundle:^${{ matrix.symfony }} \
+            symfony/yaml:^${{ matrix.symfony }}
 
       - name: Install dependencies
         run: composer update --prefer-dist --no-interaction --no-progress

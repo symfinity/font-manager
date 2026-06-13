@@ -1,0 +1,361 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Parameter \#1 \$callback of function array_map expects \(callable\(mixed\)\: mixed\)\|null, ''intval'' given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Command/FontsExportCommand.php
+
+		-
+			message: '#^Parameter \#1 \$callback of function array_map expects \(callable\(mixed\)\: mixed\)\|null, ''strval'' given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Command/FontsExportCommand.php
+
+		-
+			message: '#^Parameter \#1 \$exporterNames of method Symfinity\\FontManager\\Service\\ExporterOrchestrator\:\:validateDependencies\(\) expects array\<string\>, array\<mixed\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Command/FontsExportCommand.php
+
+		-
+			message: '#^Parameter \#1 \$manifestFonts of method Symfinity\\FontManager\\Command\\FontsExportCommand\:\:buildFontCollection\(\) expects array\<string, mixed\>, array\<mixed, mixed\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Command/FontsExportCommand.php
+
+		-
+			message: '#^Parameter \#2 \$exporterNames of method Symfinity\\FontManager\\Service\\ExporterOrchestrator\:\:export\(\) expects array\<string\>, array\<mixed\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Command/FontsExportCommand.php
+
+		-
+			message: '#^Parameter \$files of class Symfinity\\FontManager\\Model\\Font constructor expects array\<string, string\>, array\<mixed\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Command/FontsExportCommand.php
+
+		-
+			message: '#^Parameter \#1 \$callback of function array_map expects \(callable\(mixed\)\: mixed\)\|null, ''intval'' given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Command/FontsLockCommand.php
+
+		-
+			message: '#^Parameter \#1 \$callback of function array_map expects \(callable\(mixed\)\: mixed\)\|null, ''strval'' given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Command/FontsLockCommand.php
+
+		-
+			message: '#^Parameter \#1 \$manifestFonts of method Symfinity\\FontManager\\Command\\FontsLockCommand\:\:buildFontCollection\(\) expects array\<string, mixed\>, array\<mixed\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Command/FontsLockCommand.php
+
+		-
+			message: '#^Parameter \#2 \$array of function implode expects array\<string\>, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Command/FontsLockCommand.php
+
+		-
+			message: '#^Parameter \#2 \$exporterNames of method Symfinity\\FontManager\\Service\\ExporterOrchestrator\:\:export\(\) expects array\<string\>, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Command/FontsLockCommand.php
+
+		-
+			message: '#^Parameter \$files of class Symfinity\\FontManager\\Model\\Font constructor expects array\<string, string\>, array\<mixed\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Command/FontsLockCommand.php
+
+		-
+			message: '#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\.$#'
+			identifier: foreach.nonIterable
+			count: 2
+			path: src/Command/FontsPruneCommand.php
+
+		-
+			message: '#^Cannot cast mixed to string\.$#'
+			identifier: cast.string
+			count: 1
+			path: src/Command/FontsPruneCommand.php
+
+		-
+			message: '#^Possibly invalid array key type mixed\.$#'
+			identifier: offsetAccess.invalidOffset
+			count: 1
+			path: src/Command/FontsPruneCommand.php
+
+		-
+			message: '#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\.$#'
+			identifier: foreach.nonIterable
+			count: 1
+			path: src/Command/FontsStatusCommand.php
+
+		-
+			message: '#^Parameter \#1 \$value of function count expects array\|Countable, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Command/FontsStatusCommand.php
+
+		-
+			message: '#^Parameter \#2 \$array of function implode expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Command/FontsStatusCommand.php
+
+		-
+			message: '#^Cannot access offset ''auto_detect'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/DependencyInjection/FontManagerExtension.php
+
+		-
+			message: '#^Cannot access offset ''bunny'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/DependencyInjection/FontManagerExtension.php
+
+		-
+			message: '#^Cannot access offset ''font_loading_api'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/DependencyInjection/FontManagerExtension.php
+
+		-
+			message: '#^Cannot access offset ''fontsource'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/DependencyInjection/FontManagerExtension.php
+
+		-
+			message: '#^Cannot access offset ''formats'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/DependencyInjection/FontManagerExtension.php
+
+		-
+			message: '#^Cannot access offset ''google'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/DependencyInjection/FontManagerExtension.php
+
+		-
+			message: '#^Cannot access offset ''intelligent_fallbacks'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/DependencyInjection/FontManagerExtension.php
+
+		-
+			message: '#^Cannot access offset ''local'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/DependencyInjection/FontManagerExtension.php
+
+		-
+			message: '#^Cannot access offset ''output'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/DependencyInjection/FontManagerExtension.php
+
+		-
+			message: '#^Cannot access offset ''prefer_variable_fonts'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/DependencyInjection/FontManagerExtension.php
+
+		-
+			message: '#^Cannot access offset ''preload_critical_fonts'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/DependencyInjection/FontManagerExtension.php
+
+		-
+			message: '#^Cannot access offset ''resource_hints'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/DependencyInjection/FontManagerExtension.php
+
+		-
+			message: '#^Cannot access offset ''tool'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/DependencyInjection/FontManagerExtension.php
+
+		-
+			message: '#^Parameter \#2 \$value of method Symfony\\Component\\DependencyInjection\\Container\:\:setParameter\(\) expects array\|bool\|float\|int\|string\|UnitEnum\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 20
+			path: src/DependencyInjection/FontManagerExtension.php
+
+		-
+			message: '#^Method Symfinity\\FontManager\\Provider\\BunnyFontsProvider\:\:getFontMetadata\(\) never returns null so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: src/Provider/BunnyFontsProvider.php
+
+		-
+			message: '#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\.$#'
+			identifier: foreach.nonIterable
+			count: 1
+			path: src/Provider/FontsourceProvider.php
+
+		-
+			message: '#^Cannot access offset ''latest'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: src/Provider/FontsourceProvider.php
+
+		-
+			message: '#^Cannot access offset ''name'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Provider/FontsourceProvider.php
+
+		-
+			message: '#^Cannot access offset ''package'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Provider/FontsourceProvider.php
+
+		-
+			message: '#^Cannot cast mixed to string\.$#'
+			identifier: cast.string
+			count: 2
+			path: src/Provider/FontsourceProvider.php
+
+		-
+			message: '#^Method Symfinity\\FontManager\\Provider\\FontsourceProvider\:\:getLatestVersion\(\) should return string but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Provider/FontsourceProvider.php
+
+		-
+			message: '#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\.$#'
+			identifier: foreach.nonIterable
+			count: 1
+			path: src/Provider/GoogleFontsProvider.php
+
+		-
+			message: '#^Cannot access offset ''category'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Provider/GoogleFontsProvider.php
+
+		-
+			message: '#^Cannot access offset ''family'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: src/Provider/GoogleFontsProvider.php
+
+		-
+			message: '#^Cannot access offset ''variants'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Provider/GoogleFontsProvider.php
+
+		-
+			message: '#^Method Symfinity\\FontManager\\Provider\\GoogleFontsProvider\:\:getFontMetadata\(\) should return array\<string, mixed\>\|null but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Provider/GoogleFontsProvider.php
+
+		-
+			message: '#^Method Symfinity\\FontManager\\Provider\\GoogleFontsProvider\:\:searchFonts\(\) should return array\<int, array\{family\: string, category\: string, variants\: array\<string\>\}\> but returns list\<array\{family\: mixed, category\: mixed, variants\: mixed\}\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Provider/GoogleFontsProvider.php
+
+		-
+			message: '#^Parameter \#1 \$array of function array_filter expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Provider/GoogleFontsProvider.php
+
+		-
+			message: '#^Parameter \#1 \$array of function array_slice expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Provider/GoogleFontsProvider.php
+
+		-
+			message: '#^Parameter \#2 \$callback of function array_filter expects \(callable\(mixed\)\: bool\)\|null, Closure\(array\)\: bool given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Provider/GoogleFontsProvider.php
+
+		-
+			message: '#^Parameter \#1 \$callback of function array_map expects \(callable\(mixed\)\: mixed\)\|null, ''intval'' given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Provider/LocalFontsProvider.php
+
+		-
+			message: '#^Parameter \#1 \$callback of function array_map expects \(callable\(mixed\)\: mixed\)\|null, ''strval'' given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Provider/LocalFontsProvider.php
+
+		-
+			message: '#^Parameter \#1 \$fontConfig of method Symfinity\\FontManager\\Provider\\LocalFontsProvider\:\:buildVariantList\(\) expects array\<string, mixed\>, array\<mixed\> given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Provider/LocalFontsProvider.php
+
+		-
+			message: '#^Call to function method_exists\(\) with Symfony\\Component\\Filesystem\\Filesystem and ''readFile'' will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Service/FontLockManager.php
+
+		-
+			message: '#^Method Symfinity\\FontManager\\Service\\FontLockManager\:\:loadManifest\(\) should return array\<string, mixed\> but returns array\<mixed\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Service/FontLockManager.php
+
+		-
+			message: '#^Parameter \#1 \.\.\.\$arrays of function array_merge expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 3
+			path: src/Service/FormatAutoDetector.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$arrays of function array_merge expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 3
+			path: src/Service/FormatAutoDetector.php
+
+		-
+			message: '#^Static property Symfinity\\FontManager\\Twig\\FontManagerRuntime\:\:\$manifestCache \(array\<string, mixed\>\|null\) does not accept array\<mixed\>\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/Twig/FontManagerRuntime.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertIsString\(\) with string will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: tests/FontManagerBundleTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertIsArray\(\) with array\<int, array\{family\: string, category\: string, variants\: array\<string\>\}\> will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: tests/Provider/FontsourceProviderTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertIsArray\(\) with array\<int, array\{family\: string, category\: string, variants\: array\<string\>\}\> will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: tests/Provider/GoogleFontsProviderTest.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertIsArray\(\) with array\<Twig\\TwigFunction\> will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: tests/Twig/FontManagerExtensionTest.php

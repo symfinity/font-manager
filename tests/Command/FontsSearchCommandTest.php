@@ -8,7 +8,6 @@ use Symfinity\FontManager\Command\FontsSearchCommand;
 use Symfinity\FontManager\Provider\GoogleFontsProvider;
 use Symfinity\FontManager\Provider\ProviderRegistry;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\HttpClient\Response\MockResponse;
@@ -38,9 +37,6 @@ final class FontsSearchCommandTest extends TestCase
         $registry->registerProvider($googleProvider);
 
         $command = new FontsSearchCommand($registry);
-        $application = new Application();
-        $application->add($command);
-
         $commandTester = new CommandTester($command);
         $commandTester->execute(['query' => 'Robot']);
 
