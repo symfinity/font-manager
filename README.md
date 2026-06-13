@@ -57,6 +57,7 @@ The Flex recipe registers the bundle for **dev** and **test** only. Enable **pro
 ## Documentation
 - **[Quickstart](docs/quickstart.md)** - Get started in 5 minutes
 - **[Installation](docs/installation.md)** - Flex, manual setup, production
+- **[Upgrade](docs/upgrade.md)** - Version migration (0.1 → 0.2, Symfinity relocation)
 - **[Export Formats](docs/exports.md)** - Multi-format export guide (CSS, SCSS, Tailwind, TypeScript, Design Tokens)
 - **[Usage Guide](docs/usage.md)** - Function parameters and examples
 - **[Providers](docs/providers.md)** - Provider comparison and setup
@@ -66,8 +67,8 @@ The Flex recipe registers the bundle for **dev** and **test** only. Enable **pro
 - **[Migration Guide](docs/migration.md)** - Migrating from google-fonts
 
 ## Requirements
-- PHP 8.1 or higher
-- Symfony 6.4, 7.x, or 8.x
+- PHP 8.2 or higher (8.1 may work; CI tests 8.2+)
+- Symfony 6.4, 7.4, 8.0, or 8.1
 - Twig 3.0 or higher
 
 ## Support

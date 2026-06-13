@@ -1,4 +1,4 @@
-## Quick Start
+# Quickstart
 
 ### 1. Add fonts to your template
 ```twig
@@ -72,7 +72,7 @@ font_manager:
             enabled: true  # GDPR-compliant, zero tracking
 ```
 
-For detailed configuration options, see [Configuration Guide](docs/configuration.md).
+For detailed configuration options, see [Configuration](configuration.md).
 
 ## Migration from google-fonts
 Migrating from `neuralglitch/google-fonts`? Use the automatic migration command:
@@ -82,7 +82,7 @@ php bin/console fonts:migrate-from-google-fonts --dry-run  # Preview
 php bin/console fonts:migrate-from-google-fonts            # Apply
 ```
 
-See [Migration Guide](docs/migration.md) for details.
+See [Migration Guide](migration.md) for details.
 
 ## Multi-Format Export
 Font Manager can export fonts in 12+ formats for seamless framework integration:
@@ -136,3 +136,15 @@ function applyFont(element: HTMLElement, family: FontFamily) {
   element.style.fontFamily = fonts[family].family; // Type-safe!
 }
 ```
+
+## Next steps
+
+- [Export Formats](exports.md) — full format catalog
+- [Commands](commands.md) — CLI reference
+- [Providers](providers.md) — Google, Bunny, Fontsource, local
+
+## Support
+
+- [CHANGELOG](../CHANGELOG.md)
+- [CONTRIBUTING](../CONTRIBUTING.md)
+- [GitHub Issues](https://github.com/symfinity/font-manager/issues)

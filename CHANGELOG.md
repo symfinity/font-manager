@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.2] - 2026-06-14
+
+### Changed
+
+- Split mirror CI expanded to PHP 8.2–8.5 × Symfony 6.4, 7.4, 8.0, and 8.1 (PHPUnit + PHPStan on every cell)
+- Flex recipe version folder `0.2` for `^0.2` installs (recipe `0.1` unchanged for existing `^0.1` constraints)
+- Handbook: consumer upgrade guide, index cleanup, quickstart cross-links and support footer
+- Packagist archives slimmed via `.gitattributes` `export-ignore` rules
+
+### Notes
+
+- No functional or API changes — patch release following the 0.2.1 relocation note
+- Symfony 8.0 remains in the CI matrix for compatibility; prefer 8.1+ for new projects
+
 ## [0.2.1] - 2026-06-12
 
 ### Changed

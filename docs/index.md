@@ -1,6 +1,6 @@
 # Overview
 
-Package handbook for this library.
+Handbook for **symfinity/font-manager** — multi-provider font loading, locking, and export for Symfony.
 
 ## Pages
 
@@ -8,15 +8,12 @@ Package handbook for this library.
 - [Quickstart](quickstart.md)
 - [Configuration](configuration.md)
 - [Usage](usage.md)
-- [Upgrade](upgrade.md)
-- [Troubleshooting](troubleshooting.md)
-- [Reference](reference.md)
-- [Commands](commands.md)
-- [Exporter Policy](exporter-policy.md)
-- [Exports](exports.md)
-- [Local Fonts](local-fonts.md)
-- [M4 Public Release Checklist](m4-public-release-checklist.md)
-- [Migration From Google Fonts](migration-from-google-fonts.md)
-- [Migration](migration.md)
-- [Performance](performance.md)
+- [Export Formats](exports.md)
 - [Providers](providers.md)
+- [Commands](commands.md)
+- [Local Fonts](local-fonts.md)
+- [Migration](migration.md)
+- [Migration from google-fonts](migration-from-google-fonts.md)
+- [Performance](performance.md)
+- [Exporter Policy](exporter-policy.md)
+- [Upgrade](upgrade.md)
