@@ -49,6 +49,10 @@
         "symfony/asset-mapper": "^6.4||^7.0||^8.0",
         "symfony/yaml": "^6.4||^7.0||^8.0"
     },
+    "replace": {
+        "neuralglitch/font-manager": "*",
+        "neuralglitch/google-fonts": "*"
+    },
     "autoload": {
         "psr-4": {
             "Symfinity\\FontManager\\": "src/"

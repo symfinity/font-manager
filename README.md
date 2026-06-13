@@ -15,7 +15,9 @@
 
 </div>
 
-> **Read-only mirror.** Source of truth: [symfinity/symfinity](https://github.com/symfinity/symfinity) (`packages/font-manager/`). See [CONTRIBUTING.md](CONTRIBUTING.md) for how to propose changes.
+> [!NOTE]
+> **Read-only mirror.** 
+> See [CONTRIBUTING.md](CONTRIBUTING.md) for how to propose changes.
 
 ## Features
 - **Multiple Providers** - Google Fonts, Bunny Fonts, Fontsource, and Local Fonts
