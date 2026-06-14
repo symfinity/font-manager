@@ -17,7 +17,8 @@ final class Font
         private readonly array $styles,
         private readonly bool $monospace = false,
         private readonly ?string $semantic = null,
-        private readonly array $files = []
+        private readonly array $files = [],
+        private readonly ?string $cssVariable = null,
     ) {
     }
 
@@ -70,9 +71,18 @@ final class Font
      */
     public function getCssValue(): string
     {
-        $fallback = $this->monospace ? 'monospace' : 'sans-serif';
+        $fallback = $this->monospace ? 'monospace' : (str_contains(strtolower($this->name), 'serif') ? 'serif' : 'sans-serif');
 
         return sprintf("'%s', %s", $this->name, $fallback);
+    }
+
+    public function getCssVariableName(): string
+    {
+        if (null !== $this->cssVariable && '' !== $this->cssVariable) {
+            return $this->cssVariable;
+        }
+
+        return '--font-family-' . $this->getSanitizedName();
     }
 
     /**

@@ -75,9 +75,30 @@ services:
             $params: '@parameter_bag'
         tags: ['console.command']
 
+    Symfinity\FontManager\Import\FonttrioRegistryClient:
+        arguments:
+            $httpClient: '@http_client'
+            $fixtureDirectory: null
+
+    Symfinity\FontManager\Import\FonttrioPairingAdapter: ~
+
+    Symfinity\FontManager\Import\PairingConfigMerger: ~
+
+    Symfinity\FontManager\Import\FontManagerConfigWriter: ~
+
+    Symfinity\FontManager\Import\PairingFontCollectionFactory: ~
+
+    Symfinity\FontManager\Import\FontPairingImportPort: '@Symfinity\FontManager\Import\FonttrioPairingAdapter'
+
+    Symfinity\FontManager\Command\ImportPairingCommand:
+        arguments:
+            $projectDir: '%kernel.project_dir%'
+        tags: ['console.command']
+
     Symfinity\FontManager\Command\FontsStatusCommand:
         arguments:
             $manifestFile: '%font_manager.manifest_file%'
+            $pairingsConfig: '%font_manager.pairings%'
         tags: ['console.command']
 
     Symfinity\FontManager\Command\FontsPruneCommand:

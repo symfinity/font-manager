@@ -19,7 +19,8 @@ final class FontsStatusCommand extends Command
 {
     public function __construct(
         private readonly string $manifestFile,
-        private readonly Filesystem $filesystem
+        private readonly Filesystem $filesystem,
+        private readonly ?array $pairingsConfig = null,
     ) {
         parent::__construct();
     }
@@ -31,6 +32,7 @@ final class FontsStatusCommand extends Command
 
         if (!$this->filesystem->exists($this->manifestFile)) {
             $io->warning('No fonts locked yet. Run fonts:lock to lock fonts for production.');
+            $this->renderPairingStatus($io);
 
             return Command::SUCCESS;
         }
@@ -57,6 +59,8 @@ final class FontsStatusCommand extends Command
             ['Manifest File' => $this->manifestFile]
         );
 
+        $this->renderPairingStatus($io);
+
         $fonts = $manifest['fonts'] ?? [];
         if ([] !== $fonts) {
             $io->section('Locked Fonts');
@@ -79,5 +83,38 @@ final class FontsStatusCommand extends Command
         }
 
         return Command::SUCCESS;
+    }
+
+    private function renderPairingStatus(SymfonyStyle $io): void
+    {
+        if (null === $this->pairingsConfig || [] === $this->pairingsConfig) {
+            return;
+        }
+
+        $active = $this->pairingsConfig['active'] ?? null;
+        $catalog = $this->pairingsConfig['catalog'] ?? [];
+        $activeRoles = $this->pairingsConfig['active_roles'] ?? [];
+
+        if (!is_string($active) && (!is_array($catalog) || [] === $catalog)) {
+            return;
+        }
+
+        $io->section('Pairings');
+
+        if (is_string($active) && '' !== $active) {
+            $io->writeln(sprintf('Active pairing: <info>%s</info>', $active));
+        }
+
+        if (is_array($activeRoles) && [] !== $activeRoles) {
+            $io->definitionList(
+                ['Body' => $activeRoles['body'] ?? '—'],
+                ['Heading' => $activeRoles['heading'] ?? '—'],
+                ['Mono' => $activeRoles['mono'] ?? '—'],
+            );
+        }
+
+        if (is_array($catalog) && [] !== $catalog) {
+            $io->writeln('Catalog: ' . implode(', ', array_map('strval', array_keys($catalog))));
+        }
     }
 }

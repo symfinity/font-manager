@@ -12,6 +12,7 @@ use Symfinity\FontManager\Service\BuildToolDetector;
 use Symfinity\FontManager\Service\ExporterOrchestrator;
 use Symfinity\FontManager\Service\FontDownloader;
 use Symfinity\FontManager\Service\FontLockManager;
+use Symfinity\FontManager\Import\PairingFontCollectionFactory;
 use Symfinity\FontManager\Service\FormatAutoDetector;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -59,7 +60,15 @@ final class FontsLockCommandTest extends TestCase
             'font_manager.export.auto_detect' => false,
         ]);
 
-        $command = new FontsLockCommand($lockManager, $orchestrator, $buildToolDetector, $formatAutoDetector, $params, $this->tempDir);
+        $command = new FontsLockCommand(
+            $lockManager,
+            $orchestrator,
+            $buildToolDetector,
+            $formatAutoDetector,
+            new PairingFontCollectionFactory(),
+            $params,
+            $this->tempDir
+        );
         $commandTester = new CommandTester($command);
         $commandTester->execute([]);
 
@@ -101,7 +110,15 @@ final class FontsLockCommandTest extends TestCase
             'font_manager.export.auto_detect' => false,
         ]);
 
-        $command = new FontsLockCommand($lockManager, $orchestrator, $buildToolDetector, $formatAutoDetector, $params, $this->tempDir);
+        $command = new FontsLockCommand(
+            $lockManager,
+            $orchestrator,
+            $buildToolDetector,
+            $formatAutoDetector,
+            new PairingFontCollectionFactory(),
+            $params,
+            $this->tempDir
+        );
         $commandTester = new CommandTester($command);
         $commandTester->execute([]);
 

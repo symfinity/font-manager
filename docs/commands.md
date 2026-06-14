@@ -97,6 +97,38 @@ php bin/console fonts:status
 - Weights and styles per font
 - Number of files
 - Provider used
+- Active Fonttrio pairing + catalog ids (when configured)
+
+---
+
+## fonts:import-pairing
+
+Import a [Fonttrio](https://www.fonttrio.xyz) pairing preset into `config/packages/font_manager.yaml`.
+
+```bash
+# Slug form
+php bin/console fonts:import-pairing @fonttrio/editorial
+
+# HTTPS registry URL
+php bin/console fonts:import-pairing https://www.fonttrio.xyz/r/editorial.json
+
+# Catalog id (when pairings.catalog.editorial.source is set)
+php bin/console fonts:import-pairing editorial
+
+# Preview merge without writing
+php bin/console fonts:import-pairing @fonttrio/editorial --dry-run
+
+# Import all pairings.catalog entries
+php bin/console fonts:import-pairing --all-catalog
+```
+
+**Then:** run `fonts:lock` to download fonts and export `css_variables`.
+
+Cross-links: [font-manager-kernel-pairing.md](./font-manager-kernel-pairing.md) · [exports.md](./exports.md) Option A semantic aliases.
+
+**Options:**
+- `--dry-run` — parse and print merged YAML; no write
+- `--all-catalog` — import every `pairings.catalog` entry sequentially
 
 ---
 

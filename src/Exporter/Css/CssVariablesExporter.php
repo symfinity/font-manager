@@ -39,35 +39,43 @@ final class CssVariablesExporter extends AbstractExporter
         // Font families
         $output .= "  /* Font Families */\n";
         foreach ($fonts->all() as $font) {
-            $varName = '--font-family-' . $font->getSanitizedName();
+            $varName = $font->getCssVariableName();
             $output .= sprintf("  %s: %s;\n", $varName, $font->getCssValue());
         }
 
         // Semantic aliases
-        if ($fonts->hasSemantic('sans') || $fonts->hasSemantic('serif') || $fonts->hasSemantic('mono')) {
+        if ($fonts->hasSemantic('sans') || $fonts->hasSemantic('serif') || $fonts->hasSemantic('mono') || $fonts->hasSemantic('heading')) {
             $output .= "\n  /* Semantic Aliases */\n";
 
             $sansFont = $fonts->getSemantic('sans');
             if (null !== $sansFont) {
                 $output .= sprintf(
-                    "  --font-family-sans: var(--font-family-%s);\n",
-                    $sansFont->getSanitizedName()
+                    "  --font-family-sans: var(%s);\n",
+                    $sansFont->getCssVariableName()
                 );
             }
 
             $serifFont = $fonts->getSemantic('serif');
             if (null !== $serifFont) {
                 $output .= sprintf(
-                    "  --font-family-serif: var(--font-family-%s);\n",
-                    $serifFont->getSanitizedName()
+                    "  --font-family-serif: var(%s);\n",
+                    $serifFont->getCssVariableName()
                 );
             }
 
             $monoFont = $fonts->getSemantic('mono');
             if (null !== $monoFont) {
                 $output .= sprintf(
-                    "  --font-family-mono: var(--font-family-%s);\n",
-                    $monoFont->getSanitizedName()
+                    "  --font-family-mono: var(%s);\n",
+                    $monoFont->getCssVariableName()
+                );
+            }
+
+            $headingFont = $fonts->getSemantic('heading');
+            if (null !== $headingFont) {
+                $output .= sprintf(
+                    "  --font-heading: var(%s);\n",
+                    $headingFont->getCssVariableName()
                 );
             }
         }

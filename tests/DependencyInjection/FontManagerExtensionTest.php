@@ -22,6 +22,8 @@ final class FontManagerExtensionTest extends TestCase
         self::assertTrue($container->hasParameter('font_manager.use_locked_fonts'));
         self::assertTrue($container->hasParameter('font_manager.fonts_dir'));
         self::assertTrue($container->hasParameter('font_manager.manifest_file'));
+        self::assertTrue($container->hasParameter('font_manager.fonts'));
+        self::assertTrue($container->hasParameter('font_manager.pairings'));
     }
 
     public function testLoadSetsCustomParameters(): void

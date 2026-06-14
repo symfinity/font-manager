@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symfinity\FontManager\Command;
 
 use Symfinity\FontManager\Enum\BuildToolType;
+use Symfinity\FontManager\Import\PairingFontCollectionFactory;
 use Symfinity\FontManager\Model\Font;
 use Symfinity\FontManager\Model\FontCollection;
 use Symfinity\FontManager\Service\BuildToolDetector;
@@ -31,6 +32,7 @@ final class FontsLockCommand extends Command
         private readonly ExporterOrchestrator $orchestrator,
         private readonly BuildToolDetector $buildToolDetector,
         private readonly FormatAutoDetector $formatAutoDetector,
+        private readonly PairingFontCollectionFactory $pairingFontCollectionFactory,
         private readonly ParameterBagInterface $params,
         private readonly string $projectDir
     ) {
@@ -177,6 +179,20 @@ final class FontsLockCommand extends Command
      */
     private function buildFontCollection(array $manifestFonts): FontCollection
     {
+        $pairings = $this->params->get('font_manager.pairings');
+        $fontsConfig = $this->params->get('font_manager.fonts');
+
+        if (
+            is_array($pairings)
+            && is_string($pairings['active'] ?? null)
+            && is_array($fontsConfig)
+            && [] !== $fontsConfig
+        ) {
+            $activeRoles = is_array($pairings['active_roles'] ?? null) ? $pairings['active_roles'] : [];
+
+            return $this->pairingFontCollectionFactory->fromConfig($fontsConfig, $activeRoles, $manifestFonts);
+        }
+
         $collection = new FontCollection();
 
         foreach ($manifestFonts as $name => $fontData) {
