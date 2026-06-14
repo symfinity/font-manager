@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace Symfinity\FontManager\Tests\Integration\Command;
 
+use Symfinity\FontManager\Command\ImportPairingCommand;
 use Symfinity\FontManager\Import\FontManagerConfigWriter;
 use Symfinity\FontManager\Import\FonttrioPairingAdapter;
 use Symfinity\FontManager\Import\FonttrioRegistryClient;
 use Symfinity\FontManager\Import\PairingConfigMerger;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Console\Tester\CommandTester;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Yaml;
 
@@ -53,15 +56,72 @@ final class ImportPairingCommandTest extends TestCase
         self::assertSame('editorial', $parsed['font_manager']['pairings']['active'] ?? null);
     }
 
-    public function testDryRunMergePreviewDoesNotWriteConfig(): void
+    public function testCommandWritesConfigFromFixtureSource(): void
     {
-        $client = new FonttrioRegistryClient(null, $this->fixtureDir);
-        $adapter = new FonttrioPairingAdapter($client);
-        $result = $adapter->import($this->fixtureDir . '/editorial.json');
-        $merged = (new PairingConfigMerger())->merge([], $result);
+        $tester = new CommandTester($this->createCommand());
+        $exit = $tester->execute(['source' => $this->fixtureDir . '/editorial.json']);
 
-        self::assertSame('editorial', $merged['pairings']['active'] ?? null);
-        self::assertCount(3, $merged['fonts'] ?? []);
+        self::assertSame(0, $exit);
+        $configPath = $this->tempDir . '/config/packages/font_manager.yaml';
+        self::assertTrue($this->filesystem->exists($configPath));
+
+        $parsed = Yaml::parseFile($configPath);
+        self::assertSame('editorial', $parsed['font_manager']['pairings']['active'] ?? null);
+        self::assertCount(3, $parsed['font_manager']['fonts'] ?? []);
+        self::assertStringContainsString('editorial', $tester->getDisplay());
+    }
+
+    public function testCommandDryRunDoesNotWriteConfig(): void
+    {
+        $tester = new CommandTester($this->createCommand());
+        $exit = $tester->execute([
+            'source' => $this->fixtureDir . '/editorial.json',
+            '--dry-run' => true,
+        ]);
+
+        self::assertSame(0, $exit);
         self::assertFalse($this->filesystem->exists($this->tempDir . '/config/packages/font_manager.yaml'));
+        self::assertStringContainsString('No files written', $tester->getDisplay());
+    }
+
+    public function testCommandImportsEveryCatalogEntry(): void
+    {
+        $tester = new CommandTester($this->createCommand([
+            'font_manager.pairings' => [
+                'catalog' => [
+                    'editorial' => ['source' => $this->fixtureDir . '/editorial.json'],
+                ],
+            ],
+        ]));
+        $exit = $tester->execute(['--all-catalog' => true]);
+
+        self::assertSame(0, $exit);
+        $parsed = Yaml::parseFile($this->tempDir . '/config/packages/font_manager.yaml');
+        self::assertArrayHasKey('playfair-display', $parsed['font_manager']['fonts'] ?? []);
+    }
+
+    public function testCommandFailsWithoutSource(): void
+    {
+        $tester = new CommandTester($this->createCommand());
+        $exit = $tester->execute([]);
+
+        self::assertSame(1, $exit);
+        self::assertStringContainsString('Missing source', $tester->getDisplay());
+    }
+
+    /**
+     * @param array<string, mixed> $parameters
+     */
+    private function createCommand(array $parameters = ['font_manager.pairings' => []]): ImportPairingCommand
+    {
+        $adapter = new FonttrioPairingAdapter(new FonttrioRegistryClient(null, $this->fixtureDir));
+
+        return new ImportPairingCommand(
+            $adapter,
+            new PairingConfigMerger(),
+            new FontManagerConfigWriter($this->filesystem),
+            new ParameterBag($parameters),
+            $this->tempDir,
+        );
     }
 }

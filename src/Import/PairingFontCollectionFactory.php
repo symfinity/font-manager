@@ -12,6 +12,7 @@ final class PairingFontCollectionFactory
     /**
      * @param array<string, array<string, mixed>> $fontsConfig
      * @param array{body?: string, heading?: string, mono?: string} $activeRoles
+     * @param array<string, array<string, mixed>> $manifestFonts downloaded font manifest keyed by family or slug
      */
     public function fromConfig(array $fontsConfig, array $activeRoles, array $manifestFonts = []): FontCollection
     {
@@ -43,6 +44,9 @@ final class PairingFontCollectionFactory
             $cssVariable = $fontConfig['css_variable'] ?? null;
             $cssVariable = is_string($cssVariable) ? $cssVariable : null;
 
+            $category = $fontConfig['category'] ?? null;
+            $category = is_string($category) ? $category : null;
+
             $manifestEntry = $manifestFonts[$family] ?? $manifestFonts[$slug] ?? null;
             $files = is_array($manifestEntry) && is_array($manifestEntry['files'] ?? null)
                 ? $manifestEntry['files']
@@ -56,6 +60,7 @@ final class PairingFontCollectionFactory
                 semantic: $semanticBySlug[$slug] ?? null,
                 files: $files,
                 cssVariable: $cssVariable,
+                category: $category,
             ));
         }
 

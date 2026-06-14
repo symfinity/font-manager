@@ -19,6 +19,7 @@ final class Font
         private readonly ?string $semantic = null,
         private readonly array $files = [],
         private readonly ?string $cssVariable = null,
+        private readonly ?string $category = null,
     ) {
     }
 
@@ -71,9 +72,39 @@ final class Font
      */
     public function getCssValue(): string
     {
-        $fallback = $this->monospace ? 'monospace' : (str_contains(strtolower($this->name), 'serif') ? 'serif' : 'sans-serif');
+        return sprintf("'%s', %s", $this->name, $this->genericFamily());
+    }
 
-        return sprintf("'%s', %s", $this->name, $fallback);
+    /**
+     * Resolve the generic CSS font family. Prefers an explicit category (e.g. from
+     * a font registry) over guessing from the family name, which mislabels serif
+     * faces such as "Playfair Display" that do not contain "serif".
+     */
+    private function genericFamily(): string
+    {
+        if ($this->monospace) {
+            return 'monospace';
+        }
+
+        if (null !== $this->category && '' !== $this->category) {
+            $category = strtolower($this->category);
+
+            return match (true) {
+                str_contains($category, 'mono') => 'monospace',
+                str_contains($category, 'sans') => 'sans-serif',
+                str_contains($category, 'serif') => 'serif',
+                str_contains($category, 'hand'), str_contains($category, 'script'), str_contains($category, 'cursive') => 'cursive',
+                str_contains($category, 'display') => 'sans-serif',
+                default => $this->genericFamilyFromName(),
+            };
+        }
+
+        return $this->genericFamilyFromName();
+    }
+
+    private function genericFamilyFromName(): string
+    {
+        return str_contains(strtolower($this->name), 'serif') ? 'serif' : 'sans-serif';
     }
 
     public function getCssVariableName(): string

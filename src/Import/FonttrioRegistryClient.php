@@ -12,10 +12,24 @@ final class FonttrioRegistryClient
 {
     public const DEFAULT_BASE_URL = 'https://www.fonttrio.xyz/r/';
 
+    /** @var list<string> */
+    public const DEFAULT_ALLOWED_HOSTS = ['www.fonttrio.xyz', 'fonttrio.xyz'];
+
+    /** @var list<string> */
+    private array $allowedHosts;
+
+    /**
+     * @param list<string> $allowedHosts hosts permitted for remote registry fetches (SSRF guard)
+     */
     public function __construct(
         private readonly ?HttpClientInterface $httpClient = null,
         private readonly ?string $fixtureDirectory = null,
+        array $allowedHosts = self::DEFAULT_ALLOWED_HOSTS,
     ) {
+        $this->allowedHosts = array_values(array_map(
+            static fn (string $host): string => strtolower(trim($host)),
+            $allowedHosts,
+        ));
     }
 
     /**
@@ -33,6 +47,8 @@ final class FonttrioRegistryClient
         if (null !== $fixturePath) {
             return $this->loadLocal($fixturePath);
         }
+
+        $this->assertRemoteHostAllowed($url);
 
         $client = $this->httpClient ?? HttpClient::create();
         $response = $client->request('GET', $url, [
@@ -85,6 +101,20 @@ final class FonttrioRegistryClient
             'Unsupported Fonttrio source "%s". Use @fonttrio/{slug}, an HTTPS registry URL, or a local fixture path.',
             $source
         ));
+    }
+
+    private function assertRemoteHostAllowed(string $url): void
+    {
+        $host = parse_url($url, PHP_URL_HOST);
+        $host = is_string($host) ? strtolower($host) : '';
+
+        if ('' === $host || !in_array($host, $this->allowedHosts, true)) {
+            throw new InvalidFonttrioRegistryException(sprintf(
+                'Refusing to fetch Fonttrio registry from disallowed host "%s". Allowed hosts: %s. Use @fonttrio/{slug} or a local fixture path for other sources.',
+                '' !== $host ? $host : '(none)',
+                implode(', ', $this->allowedHosts)
+            ));
+        }
     }
 
     private function isLocalSource(string $source): bool

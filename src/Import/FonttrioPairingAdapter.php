@@ -143,18 +143,24 @@ final class FonttrioPairingAdapter implements FontPairingImportPort
 
         $weights = $this->normalizeWeights($font['weight'] ?? []);
         $subsets = $this->normalizeSubsets($font['subsets'] ?? ['latin']);
+        $category = $fontItem['category'] ?? ($font['category'] ?? null);
+
+        $entry = [
+            'provider' => 'google',
+            'family' => $family,
+            'import' => $import,
+            'weights' => $weights,
+            'subsets' => $subsets,
+            'css_variable' => $variable,
+        ];
+        if (is_string($category) && '' !== $category) {
+            $entry['category'] = $category;
+        }
 
         return [
             'slug' => $name,
             'css_variable' => $variable,
-            'entry' => [
-                'provider' => 'google',
-                'family' => $family,
-                'import' => $import,
-                'weights' => $weights,
-                'subsets' => $subsets,
-                'css_variable' => $variable,
-            ],
+            'entry' => $entry,
         ];
     }
 

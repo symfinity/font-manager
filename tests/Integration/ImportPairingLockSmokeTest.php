@@ -25,7 +25,7 @@ final class ImportPairingLockSmokeTest extends TestCase
         self::assertStringContainsString('--font-family-sans: var(--font-source-serif-4);', $css);
         self::assertStringContainsString('--font-family-mono: var(--font-jetbrains-mono);', $css);
         self::assertStringContainsString('--font-heading: var(--font-playfair-display);', $css);
-        self::assertStringContainsString("--font-playfair-display: 'Playfair Display Variable', sans-serif;", $css);
+        self::assertStringContainsString("--font-playfair-display: 'Playfair Display Variable', serif;", $css);
     }
 
     public function testExportWithoutPairingRolesKeepsLegacySansAliasShape(): void
