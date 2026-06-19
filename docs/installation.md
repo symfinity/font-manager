@@ -14,7 +14,7 @@ composer require symfinity/font-manager
 
 The recipe (`symfinity/recipes`, version folder `0.2` for `^0.2`) applies:
 
-- `config/packages/font_manager.yaml` from the package default
+- `config/packages/symfinity_font_manager.yaml` from the package default
 - Bundle registration for **`dev`** and **`test`** environments only
 
 ## Production
@@ -39,7 +39,7 @@ When Flex is unavailable:
 
 1. `composer require symfinity/font-manager`
 2. Register `Symfinity\FontManager\FontManagerBundle` in `config/bundles.php`
-3. Copy `config/packages/font_manager.yaml` from the package into your project
+3. Copy `config/packages/symfinity_font_manager.yaml` from the package into your project
 
 ## Verify installation
 

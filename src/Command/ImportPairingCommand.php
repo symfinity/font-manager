@@ -20,7 +20,7 @@ use Symfony\Component\Yaml\Yaml;
 
 #[AsCommand(
     name: 'fonts:import-pairing',
-    description: 'Import a Fonttrio pairing preset into font_manager config'
+    description: 'Import a Fonttrio pairing preset into symfinity_font_manager config'
 )]
 final class ImportPairingCommand extends Command
 {
@@ -42,7 +42,7 @@ final class ImportPairingCommand extends Command
             ->addOption('all-catalog', null, InputOption::VALUE_NONE, 'Import every pairing listed in pairings.catalog')
             ->setHelp(
                 <<<'HELP'
-Import a Fonttrio pairing preset into <info>config/packages/font_manager.yaml</info>.
+Import a Fonttrio pairing preset into <info>config/packages/symfinity_font_manager.yaml</info>.
 
 Examples:
   <info>php bin/console fonts:import-pairing @fonttrio/editorial</info>
@@ -60,7 +60,7 @@ HELP
         $io = new SymfonyStyle($input, $output);
         $io->title('Import Font Pairing');
 
-        $configPath = $this->projectDir . '/config/packages/font_manager.yaml';
+        $configPath = $this->projectDir . '/config/packages/symfinity_font_manager.yaml';
         $existingConfig = $this->configWriter->read($configPath);
 
         if ($input->getOption('all-catalog')) {

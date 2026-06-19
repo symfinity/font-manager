@@ -82,6 +82,6 @@ final class FontManagerExtensionTest extends TestCase
     {
         $extension = new FontManagerExtension();
 
-        self::assertSame('font_manager', $extension->getAlias());
+        self::assertSame('symfinity_font_manager', $extension->getAlias());
     }
 }

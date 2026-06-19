@@ -7,8 +7,8 @@ Font Manager 0.3.0 introduces comprehensive performance optimizations for font l
 Enable all performance features:
 
 ```yaml
-# config/packages/font_manager.yaml
-font_manager:
+# config/packages/symfinity_font_manager.yaml
+symfinity_font_manager:
     performance:
         resource_hints: true          # Generate preconnect/dns-prefetch hints
         preload_critical_fonts: false # Preload critical fonts (manual configuration)
@@ -72,7 +72,7 @@ font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Cons
 ### Disable Intelligent Fallbacks
 
 ```yaml
-font_manager:
+symfinity_font_manager:
     performance:
         intelligent_fallbacks: false  # Use simple fallbacks: 'font-name', sans-serif
 ```
@@ -82,7 +82,7 @@ font_manager:
 Preload critical fonts for above-the-fold content to improve Largest Contentful Paint (LCP).
 
 ```yaml
-font_manager:
+symfinity_font_manager:
     performance:
         preload_critical_fonts: true
 ```
@@ -94,7 +94,7 @@ font_manager:
 The Font Loading API provides programmatic control over font loading for better performance.
 
 ```yaml
-font_manager:
+symfinity_font_manager:
     performance:
         font_loading_api: true  # Experimental
 ```

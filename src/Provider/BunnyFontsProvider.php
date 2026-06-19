@@ -30,7 +30,7 @@ final class BunnyFontsProvider extends AbstractProvider
 
     public function searchFonts(string $query, int $maxResults = 20): array
     {
-        throw new ProviderException('Search API is not available for Bunny Fonts provider. Bunny Fonts uses the same font catalog as Google Fonts. To search fonts, temporarily switch provider to "google" in config/packages/font_manager.yaml, search for fonts, then switch back to "bunny" for production use.');
+        throw new ProviderException('Search API is not available for Bunny Fonts provider. Bunny Fonts uses the same font catalog as Google Fonts. To search fonts, temporarily switch provider to "google" in config/packages/symfinity_font_manager.yaml, search for fonts, then switch back to "bunny" for production use.');
     }
 
     public function getFontMetadata(string $fontName): ?array

@@ -14,7 +14,7 @@ Declare approved Fonttrio pairings in Symfony config for idempotent re-import, t
 ## Config tree
 
 ```yaml
-font_manager:
+symfinity_font_manager:
     pairings:
         # Last imported pairing id (optional; set by fonts:import-pairing)
         active: editorial

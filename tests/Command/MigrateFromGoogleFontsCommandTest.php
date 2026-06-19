@@ -55,7 +55,7 @@ final class MigrateFromGoogleFontsCommandTest extends TestCase
         self::assertStringContainsString('DRY RUN', $output);
         self::assertStringContainsString('Would create', $output);
 
-        self::assertFalse($this->filesystem->exists($configDir . '/font_manager.yaml'));
+        self::assertFalse($this->filesystem->exists($configDir . '/symfinity_font_manager.yaml'));
     }
 
     public function testExecuteMigratesConfiguration(): void
@@ -78,12 +78,12 @@ YAML;
 
         self::assertSame(0, $commandTester->getStatusCode());
 
-        self::assertTrue($this->filesystem->exists($configDir . '/font_manager.yaml'));
+        self::assertTrue($this->filesystem->exists($configDir . '/symfinity_font_manager.yaml'));
         self::assertTrue($this->filesystem->exists($configDir . '/google_fonts.yaml.backup'));
 
-        $newContent = file_get_contents($configDir . '/font_manager.yaml');
+        $newContent = file_get_contents($configDir . '/symfinity_font_manager.yaml');
         self::assertIsString($newContent);
-        self::assertStringContainsString('font_manager:', $newContent);
+        self::assertStringContainsString('symfinity_font_manager:', $newContent);
         self::assertStringContainsString("default_provider: 'google'", $newContent);
     }
 
@@ -178,7 +178,7 @@ TWIG;
         $commandTester = new CommandTester($command);
         $commandTester->execute(['--skip-config' => true]);
 
-        self::assertFalse($this->filesystem->exists($configDir . '/font_manager.yaml'));
+        self::assertFalse($this->filesystem->exists($configDir . '/symfinity_font_manager.yaml'));
     }
 
     public function testExecuteHandlesExistingFontManagerConfig(): void
@@ -186,7 +186,7 @@ TWIG;
         $configDir = $this->tempDir . '/config/packages';
         $this->filesystem->mkdir($configDir);
         $this->filesystem->dumpFile($configDir . '/google_fonts.yaml', "google_fonts:\n");
-        $this->filesystem->dumpFile($configDir . '/font_manager.yaml', "font_manager:\n");
+        $this->filesystem->dumpFile($configDir . '/symfinity_font_manager.yaml', "symfinity_font_manager:\n");
 
         $command = new MigrateFromGoogleFontsCommand($this->tempDir, $this->filesystem);
         $commandTester = new CommandTester($command);

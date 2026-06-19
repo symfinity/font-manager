@@ -7,7 +7,7 @@ All **13** export format services are registered in the bundle `config/services.
 **Which formats run** is controlled only by application config:
 
 ```yaml
-font_manager:
+symfinity_font_manager:
     export:
         formats:
             - css_variables   # Symfinity Flex recipe default (only this line)
@@ -20,7 +20,7 @@ Omitting a format from `export.formats` means it is **not** generated on `fonts:
 | Layer | Policy |
 |-------|--------|
 | Flex recipe `0.1` | `css_variables` only |
-| Shipped package `config/packages/font_manager.yaml` | Same as recipe |
+| Shipped package `config/packages/symfinity_font_manager.yaml` | Same as recipe |
 | Full multi-format setup | Opt-in in app config — see [exports.md](./exports.md) |
 
 **Deferred for default recipe** (intake): `tailwind_config`, `scss_bootstrap`, Figma/style-dictionary exports, `export.auto_detect: true`.

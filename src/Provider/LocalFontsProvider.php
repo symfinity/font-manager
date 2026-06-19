@@ -133,7 +133,7 @@ final class LocalFontsProvider extends AbstractProvider
         $fonts = $this->config['fonts'] ?? [];
 
         if (!isset($fonts[$fontName])) {
-            throw new ConfigurationException(sprintf("Local font '%s' not found in configuration. " . 'Add it to config/packages/font_manager.yaml under providers.local.fonts', $fontName));
+            throw new ConfigurationException(sprintf("Local font '%s' not found in configuration. " . 'Add it to config/packages/symfinity_font_manager.yaml under providers.local.fonts', $fontName));
         }
 
         $fontConfig = $fonts[$fontName];

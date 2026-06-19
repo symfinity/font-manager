@@ -9,8 +9,8 @@
 **API Key:** Optional (required for search)
 
 ```yaml
-# config/packages/font_manager.yaml
-font_manager:
+# config/packages/symfinity_font_manager.yaml
+symfinity_font_manager:
     default_provider: 'google'
     providers:
         google:
@@ -41,8 +41,8 @@ font_manager:
 **API Key:** Not required
 
 ```yaml
-# config/packages/font_manager.yaml
-font_manager:
+# config/packages/symfinity_font_manager.yaml
+symfinity_font_manager:
     default_provider: 'bunny'
     providers:
         bunny:
@@ -78,8 +78,8 @@ font_manager:
 **API Key:** Not required
 
 ```yaml
-# config/packages/font_manager.yaml
-font_manager:
+# config/packages/symfinity_font_manager.yaml
+symfinity_font_manager:
     default_provider: fontsource
     providers:
         fontsource:
@@ -116,8 +116,8 @@ font_manager:
 **API Key:** Not required
 
 ```yaml
-# config/packages/font_manager.yaml
-font_manager:
+# config/packages/symfinity_font_manager.yaml
+symfinity_font_manager:
     default_provider: 'local'
     providers:
         local:
@@ -187,11 +187,11 @@ php bin/console fonts:validate
 
 ```yaml
 # config/packages/dev/font_manager.yaml
-font_manager:
+symfinity_font_manager:
     default_provider: 'google'
 
 # config/packages/prod/font_manager.yaml
-font_manager:
+symfinity_font_manager:
     default_provider: 'bunny'
 ```
 
@@ -232,13 +232,13 @@ font_manager:
 
 **For GDPR compliance:**
 ```yaml
-font_manager:
+symfinity_font_manager:
     default_provider: 'bunny'  # Or lock fonts for self-hosting
 ```
 
 **For perfect privacy:**
 ```yaml
-font_manager:
+symfinity_font_manager:
     use_locked_fonts: true  # Self-host fonts (no external requests)
 ```
 

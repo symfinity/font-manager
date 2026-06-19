@@ -16,7 +16,7 @@ final class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder('font_manager');
+        $treeBuilder = new TreeBuilder('symfinity_font_manager');
         /** @var ArrayNodeDefinition $root */
         $root = $treeBuilder->getRootNode();
 

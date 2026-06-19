@@ -137,7 +137,7 @@ Each resolved font **MUST** merge into existing `font_manager.fonts` (or bundle-
 
 ```yaml
 # Illustrative — exact keys match bundle Configuration.php at implement
-font_manager:
+symfinity_font_manager:
     fonts:
         playfair-display:
             provider: google

@@ -63,6 +63,6 @@ final class FontManagerExtension extends Extension
 
     public function getAlias(): string
     {
-        return 'font_manager';
+        return 'symfinity_font_manager';
     }
 }

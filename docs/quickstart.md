@@ -23,8 +23,8 @@ The bundle automatically switches to locked fonts in production.
 
 ### 3. Configure export formats (optional)
 ```yaml
-# config/packages/font_manager.yaml
-font_manager:
+# config/packages/symfinity_font_manager.yaml
+symfinity_font_manager:
   build:
     tool: 'auto'  # auto-detect: assetmapper, webpack, or vite
   
@@ -63,8 +63,8 @@ php bin/console fonts:validate
 ## Configuration
 
 ```yaml
-# config/packages/font_manager.yaml
-font_manager:
+# config/packages/symfinity_font_manager.yaml
+symfinity_font_manager:
     default_provider: 'bunny'  # Recommended: privacy-friendly
     
     providers:
@@ -89,8 +89,8 @@ Font Manager can export fonts in 12+ formats for seamless framework integration:
 
 ### Bootstrap Integration
 ```yaml
-# config/packages/font_manager.yaml
-font_manager:
+# config/packages/symfinity_font_manager.yaml
+symfinity_font_manager:
   export:
     formats:
       - scss_bootstrap
@@ -103,7 +103,7 @@ font_manager:
 
 ### Tailwind Integration
 ```yaml
-font_manager:
+symfinity_font_manager:
   export:
     formats:
       - tailwind_config
@@ -123,7 +123,7 @@ module.exports = {
 
 ### TypeScript Integration
 ```yaml
-font_manager:
+symfinity_font_manager:
   export:
     formats:
       - typescript_definitions

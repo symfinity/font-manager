@@ -34,8 +34,8 @@ assets/fonts/custom/
 ### 2. Configure Fonts
 
 ```yaml
-# config/packages/font_manager.yaml
-font_manager:
+# config/packages/symfinity_font_manager.yaml
+symfinity_font_manager:
     default_provider: 'local'
     
     providers:
@@ -113,7 +113,7 @@ Supported formats (auto-detected from extension):
 ### Multi-Weight, Multi-Style Font
 
 ```yaml
-font_manager:
+symfinity_font_manager:
     providers:
         local:
             enabled: true

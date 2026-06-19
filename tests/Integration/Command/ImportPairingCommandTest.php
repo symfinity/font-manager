@@ -42,11 +42,11 @@ final class ImportPairingCommandTest extends TestCase
 
         $merged = (new PairingConfigMerger())->merge([], $result);
         (new FontManagerConfigWriter($this->filesystem))->write(
-            $this->tempDir . '/config/packages/font_manager.yaml',
+            $this->tempDir . '/config/packages/symfinity_font_manager.yaml',
             $merged
         );
 
-        $parsed = Yaml::parseFile($this->tempDir . '/config/packages/font_manager.yaml');
+        $parsed = Yaml::parseFile($this->tempDir . '/config/packages/symfinity_font_manager.yaml');
         self::assertIsArray($parsed);
         $fonts = $parsed['font_manager']['fonts'] ?? [];
         self::assertIsArray($fonts);
@@ -62,7 +62,7 @@ final class ImportPairingCommandTest extends TestCase
         $exit = $tester->execute(['source' => $this->fixtureDir . '/editorial.json']);
 
         self::assertSame(0, $exit);
-        $configPath = $this->tempDir . '/config/packages/font_manager.yaml';
+        $configPath = $this->tempDir . '/config/packages/symfinity_font_manager.yaml';
         self::assertTrue($this->filesystem->exists($configPath));
 
         $parsed = Yaml::parseFile($configPath);
@@ -80,7 +80,7 @@ final class ImportPairingCommandTest extends TestCase
         ]);
 
         self::assertSame(0, $exit);
-        self::assertFalse($this->filesystem->exists($this->tempDir . '/config/packages/font_manager.yaml'));
+        self::assertFalse($this->filesystem->exists($this->tempDir . '/config/packages/symfinity_font_manager.yaml'));
         self::assertStringContainsString('No files written', $tester->getDisplay());
     }
 
@@ -96,7 +96,7 @@ final class ImportPairingCommandTest extends TestCase
         $exit = $tester->execute(['--all-catalog' => true]);
 
         self::assertSame(0, $exit);
-        $parsed = Yaml::parseFile($this->tempDir . '/config/packages/font_manager.yaml');
+        $parsed = Yaml::parseFile($this->tempDir . '/config/packages/symfinity_font_manager.yaml');
         self::assertArrayHasKey('playfair-display', $parsed['font_manager']['fonts'] ?? []);
     }
 

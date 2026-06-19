@@ -1,4 +1,4 @@
-font_manager:
+symfinity_font_manager:
     default_provider: google
     unicode_subsets: ['latin', 'latin-ext']
     cache_ttl: 3600
@@ -19,5 +19,5 @@ font_manager:
             enabled: false
 
 when@prod:
-    font_manager:
+    symfinity_font_manager:
         use_locked_fonts: true

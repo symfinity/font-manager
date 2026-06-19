@@ -103,7 +103,7 @@ php bin/console fonts:status
 
 ## fonts:import-pairing
 
-Import a [Fonttrio](https://www.fonttrio.xyz) pairing preset into `config/packages/font_manager.yaml`.
+Import a [Fonttrio](https://www.fonttrio.xyz) pairing preset into `config/packages/symfinity_font_manager.yaml`.
 
 ```bash
 # Slug form

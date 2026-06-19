@@ -9,8 +9,8 @@ Font Manager can export fonts in 12+ formats for seamless integration with any C
 **Option A: Auto-Detection (Recommended)**
 
 ```yaml
-# config/packages/font_manager.yaml
-font_manager:
+# config/packages/symfinity_font_manager.yaml
+symfinity_font_manager:
     export:
         auto_detect: true  # Scans project for Bootstrap, Tailwind, TypeScript
 ```
@@ -18,7 +18,7 @@ font_manager:
 **Option B: Manual Configuration**
 
 ```yaml
-font_manager:
+symfinity_font_manager:
     export:
         formats:
             - css_variables      # CSS custom properties
@@ -663,7 +663,7 @@ npx style-dictionary build
 
 **1. Configure Export:**
 ```yaml
-font_manager:
+symfinity_font_manager:
     export:
         formats:
             - scss_bootstrap
@@ -690,7 +690,7 @@ Bootstrap automatically uses your fonts for body text, headings, and code.
 
 **1. Configure Export:**
 ```yaml
-font_manager:
+symfinity_font_manager:
     export:
         formats:
             - tailwind_config
@@ -728,7 +728,7 @@ module.exports = {
 
 **1. Configure Export:**
 ```yaml
-font_manager:
+symfinity_font_manager:
     export:
         formats:
             - esm_javascript
@@ -845,7 +845,7 @@ import './assets/fonts.js';
 ### Auto Paths (Recommended)
 
 ```yaml
-font_manager:
+symfinity_font_manager:
     build:
         tool: 'auto'  # Detects: assetmapper, webpack, or vite
     export:
@@ -858,7 +858,7 @@ font_manager:
 ### Custom Paths
 
 ```yaml
-font_manager:
+symfinity_font_manager:
     export:
         output:
             base_dir: '%kernel.project_dir%'
@@ -969,7 +969,7 @@ Export Examples:
 
 **Opt-in for new features:**
 ```yaml
-font_manager:
+symfinity_font_manager:
     export:
         formats:
             - scss_bootstrap  # Activates new export system
@@ -984,8 +984,8 @@ php bin/console fonts:lock  # Only CSS variables
 
 **After (v2.x):**
 ```yaml
-# config/packages/font_manager.yaml
-font_manager:
+# config/packages/symfinity_font_manager.yaml
+symfinity_font_manager:
     export:
         formats:
             - css_variables       # Same as before
@@ -1004,7 +1004,7 @@ php bin/console fonts:lock  # Exports all configured formats
 ### Minimal Setup (Vanilla CSS)
 
 ```yaml
-font_manager:
+symfinity_font_manager:
     export:
         formats:
             - css_variables
@@ -1013,7 +1013,7 @@ font_manager:
 ### Bootstrap Project
 
 ```yaml
-font_manager:
+symfinity_font_manager:
     export:
         formats:
             - scss_bootstrap
@@ -1022,7 +1022,7 @@ font_manager:
 ### Tailwind Project
 
 ```yaml
-font_manager:
+symfinity_font_manager:
     export:
         formats:
             - tailwind_config
@@ -1031,7 +1031,7 @@ font_manager:
 ### TypeScript + Tailwind
 
 ```yaml
-font_manager:
+symfinity_font_manager:
     export:
         formats:
             - tailwind_config
@@ -1041,7 +1041,7 @@ font_manager:
 ### Design System (Multi-Platform)
 
 ```yaml
-font_manager:
+symfinity_font_manager:
     export:
         formats:
             - css_variables
@@ -1077,7 +1077,7 @@ php bin/console fonts:export --dry-run
 
 Override in config:
 ```yaml
-font_manager:
+symfinity_font_manager:
     build:
         tool: 'webpack'  # Force specific tool
 ```

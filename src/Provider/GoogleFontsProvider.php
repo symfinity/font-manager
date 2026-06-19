@@ -41,7 +41,7 @@ final class GoogleFontsProvider extends AbstractProvider
     public function searchFonts(string $query, int $maxResults = 20): array
     {
         if (!$this->isAuthenticated()) {
-            throw new ConfigurationException('Google Fonts API key is required for search. Get your free API key at https://console.cloud.google.com/apis/credentials and configure it in config/packages/font_manager.yaml under providers.google.api_key');
+            throw new ConfigurationException('Google Fonts API key is required for search. Get your free API key at https://console.cloud.google.com/apis/credentials and configure it in config/packages/symfinity_font_manager.yaml under providers.google.api_key');
         }
 
         // Check cache for full fonts list

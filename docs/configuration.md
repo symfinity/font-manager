@@ -7,8 +7,8 @@ See [Exporter policy](./exporter-policy.md) for why all exporters exist in the c
 ## Full Configuration Example
 
 ```yaml
-# config/packages/font_manager.yaml
-font_manager:
+# config/packages/symfinity_font_manager.yaml
+symfinity_font_manager:
     # Default provider: google (Symfinity recipe), bunny, fontsource, or local
     default_provider: google
 
@@ -84,7 +84,7 @@ font_manager:
 Which provider to use by default when no provider is specified.
 
 ```yaml
-font_manager:
+symfinity_font_manager:
     default_provider: bunny  # Privacy-friendly
 ```
 
@@ -98,7 +98,7 @@ font_manager:
 Cache TTL for provider API responses in seconds.
 
 ```yaml
-font_manager:
+symfinity_font_manager:
     cache_ttl: 7200  # 2 hours
 ```
 
@@ -110,7 +110,7 @@ font_manager:
 Whether to use locked/local fonts instead of CDN.
 
 ```yaml
-font_manager:
+symfinity_font_manager:
     use_locked_fonts: true  # Use self-hosted fonts
 ```
 
@@ -124,7 +124,7 @@ font_manager:
 Directory where locked fonts are stored.
 
 ```yaml
-font_manager:
+symfinity_font_manager:
     fonts_dir: '%kernel.project_dir%/public/fonts'
 ```
 
@@ -136,7 +136,7 @@ font_manager:
 Path to the font lock manifest file.
 
 ```yaml
-font_manager:
+symfinity_font_manager:
     manifest_file: '%kernel.project_dir%/var/fonts.lock.json'
 ```
 
@@ -148,7 +148,7 @@ font_manager:
 Unicode character subsets to include when downloading fonts. This significantly reduces file count and improves performance.
 
 ```yaml
-font_manager:
+symfinity_font_manager:
     # Default: European languages only
     unicode_subsets: ['latin', 'latin-ext']  # ~83% fewer files
 ```
@@ -194,7 +194,7 @@ Font Manager supports multi-format export for seamless framework integration.
 **Values:** `auto`, `assetmapper`, `webpack`, `vite`
 
 ```yaml
-font_manager:
+symfinity_font_manager:
     build:
         tool: 'auto'  # Auto-detect build tool
 ```
@@ -207,7 +207,7 @@ font_manager:
 Export formats to generate when locking fonts.
 
 ```yaml
-font_manager:
+symfinity_font_manager:
     export:
         formats:
             - css_variables
@@ -222,7 +222,7 @@ font_manager:
 ### Provider: Google Fonts
 
 ```yaml
-font_manager:
+symfinity_font_manager:
     providers:
         google:
             enabled: true
@@ -250,7 +250,7 @@ Get your free API key at [Google Cloud Console](https://console.cloud.google.com
 ### Provider: Bunny Fonts
 
 ```yaml
-font_manager:
+symfinity_font_manager:
     providers:
         bunny:
             enabled: true
@@ -270,7 +270,7 @@ Enable Bunny Fonts provider.
 ### Provider: Local Fonts
 
 ```yaml
-font_manager:
+symfinity_font_manager:
     providers:
         local:
             enabled: true
@@ -326,7 +326,7 @@ Map of font configurations. Each font requires:
 
 ```yaml
 # config/packages/dev/font_manager.yaml
-font_manager:
+symfinity_font_manager:
     default_provider: google  # Use Google for search API
     use_locked_fonts: false   # Use CDN for faster development
 ```
@@ -335,7 +335,7 @@ font_manager:
 
 ```yaml
 # config/packages/prod/font_manager.yaml
-font_manager:
+symfinity_font_manager:
     default_provider: bunny   # Privacy-friendly
     use_locked_fonts: true    # Self-hosted fonts
 ```
@@ -370,8 +370,8 @@ google_fonts:
 ### After (font-manager)
 
 ```yaml
-# config/packages/font_manager.yaml
-font_manager:
+# config/packages/symfinity_font_manager.yaml
+symfinity_font_manager:
     default_provider: google
     providers:
         google:

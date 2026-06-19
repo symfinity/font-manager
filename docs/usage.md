@@ -84,8 +84,8 @@ font_manager(
 
 **Configuration Required:**
 ```yaml
-# config/packages/font_manager.yaml
-font_manager:
+# config/packages/symfinity_font_manager.yaml
+symfinity_font_manager:
     providers:
         local:
             enabled: true
@@ -151,7 +151,7 @@ function hello() {
 **Configuration:**
 ```yaml
 # config/packages/dev/font_manager.yaml
-font_manager:
+symfinity_font_manager:
     default_provider: 'bunny'  # Fast CDN, privacy-friendly
     use_locked_fonts: false
 ```
@@ -166,7 +166,7 @@ font_manager:
 **Configuration:**
 ```yaml
 # config/packages/prod/font_manager.yaml
-font_manager:
+symfinity_font_manager:
     use_locked_fonts: true  # Use locally locked fonts
 ```
 
@@ -194,19 +194,19 @@ php bin/console asset-map:compile
 
 ```yaml
 # config/packages/dev/font_manager.yaml
-font_manager:
+symfinity_font_manager:
     default_provider: 'google'  # Use Google for development (search API)
 
 # config/packages/prod/font_manager.yaml
-font_manager:
+symfinity_font_manager:
     default_provider: 'bunny'  # Use Bunny for production (privacy)
 ```
 
 ### Custom Font Fallbacks
 
 ```yaml
-# config/packages/font_manager.yaml
-font_manager:
+# config/packages/symfinity_font_manager.yaml
+symfinity_font_manager:
     providers:
         local:
             fonts:
@@ -248,7 +248,7 @@ php bin/console asset-map:compile
 
 ```yaml
 # Temporarily switch to Google for search
-font_manager:
+symfinity_font_manager:
     default_provider: 'google'
 ```
 
@@ -257,7 +257,7 @@ font_manager:
 php bin/console fonts:search roboto
 
 # Then switch back to Bunny for production
-font_manager:
+symfinity_font_manager:
     default_provider: 'bunny'
 ```
 
@@ -268,7 +268,7 @@ font_manager:
 php bin/console fonts:validate
 
 # Check configuration
-cat config/packages/font_manager.yaml
+cat config/packages/symfinity_font_manager.yaml
 ```
 
 ## Best Practices

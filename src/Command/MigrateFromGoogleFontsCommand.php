@@ -37,7 +37,7 @@ final class MigrateFromGoogleFontsCommand extends Command
 This command helps migrate from symfinity/font-manager to font-manager.
 
 It will:
-1. Convert config/packages/google_fonts.yaml to font_manager.yaml
+1. Convert config/packages/google_fonts.yaml to symfinity_font_manager.yaml
 2. Update templates: google_fonts() → font_manager()
 3. Move manifest file: google-fonts.lock.json → font-manager.lock.json
 4. Optionally backup old files
@@ -128,7 +128,7 @@ HELP
         $errors = [];
 
         $oldConfig = $this->projectDir . '/config/packages/google_fonts.yaml';
-        $newConfig = $this->projectDir . '/config/packages/font_manager.yaml';
+        $newConfig = $this->projectDir . '/config/packages/symfinity_font_manager.yaml';
 
         if (!$this->filesystem->exists($oldConfig)) {
             return ['changes' => [], 'errors' => []];
@@ -149,13 +149,13 @@ HELP
             return ['changes' => $changes, 'errors' => $errors];
         }
 
-        $newContent = str_replace('google_fonts:', 'font_manager:', $content);
+        $newContent = str_replace('google_fonts:', 'symfinity_font_manager:', $content);
         $newContent = str_replace('GOOGLE_FONTS_', 'GOOGLE_FONTS_', $newContent);
 
         if (!str_contains($newContent, 'default_provider:')) {
             $newContent = str_replace(
-                'font_manager:',
-                "font_manager:\n    default_provider: 'google'",
+                'symfinity_font_manager:',
+                "symfinity_font_manager:\n    default_provider: 'google'",
                 $newContent
             );
         }
