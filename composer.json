@@ -1,6 +1,6 @@
 {
     "name": "symfinity/font-manager",
-    "description": "Universal font manager for Symfony supporting multiple providers (Google Fonts, Bunny Fonts, Local Fonts, Fontsource) with development CDN and production font locking",
+    "description": "Universal font manager for Symfony supporting multiple providers",
     "type": "symfony-bundle",
     "license": "MIT",
     "homepage": "https://github.com/symfinity/font-manager",
