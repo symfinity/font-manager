@@ -13,7 +13,7 @@ php bin/console fonts:migrate-from-google-fonts
 ```
 
 **What it does:**
-- Converts `google_fonts.yaml` → `font_manager.yaml`
+- Converts `google_fonts.yaml` → `symfinity_font_manager.yaml`
 - Updates all templates: `google_fonts()` → `font_manager()`
 - Migrates manifest file
 - Creates backups automatically

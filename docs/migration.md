@@ -10,7 +10,7 @@ Use this table when replacing the legacy Packagist package with `symfinity/font-
 | PSR-4 namespace | `NeuralGlitch\FontManager\` | `Symfinity\FontManager\` |
 | Test namespace | `NeuralGlitch\FontManager\Tests\` | `Symfinity\FontManager\Tests\` |
 | Bundle class | `NeuralGlitch\FontManager\FontManagerBundle` | `Symfinity\FontManager\FontManagerBundle` |
-| Config root key | `font_manager:` | `font_manager:` (unchanged) |
+| Config root key | `font_manager:` | `symfinity_font_manager:` |
 | Config file | `config/packages/symfinity_font_manager.yaml` | `config/packages/symfinity_font_manager.yaml` |
 
 ## Composer and Symfony floor

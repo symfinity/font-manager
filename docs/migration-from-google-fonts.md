@@ -12,13 +12,13 @@ composer require symfinity/font-manager
 php bin/console fonts:migrate-from-google-fonts
 ```
 
-The command rewrites `config/packages/google_fonts.yaml` → `font_manager:` semantics and updates Twig usage where applicable. Use `--dry-run` first.
+The command rewrites `config/packages/google_fonts.yaml` → `symfinity_font_manager:` semantics and updates Twig usage where applicable. Use `--dry-run` first.
 
 ## Manual mapping
 
 | Legacy (`google-fonts`) | Symfinity (`font-manager`) |
 |-------------------------|----------------------------|
-| `google_fonts:` config root | `font_manager:` |
+| `google_fonts:` config root | `symfinity_font_manager:` |
 | Google CDN wiring | `GoogleFontsProvider` (default) or privacy providers (Bunny, Fontsource) |
 | Twig helpers | `font_manager()` |
 

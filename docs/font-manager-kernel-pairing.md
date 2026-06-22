@@ -2,7 +2,7 @@
 
 Cross-package typography alignment for Symfinity Chameleon / ui-kernel consumers.
 
-## Option A (056 — locked)
+## Option A (css_variables bridge)
 
 Font-manager exports semantic aliases; kernel tokens are mapped in **consumer CSS** — no ui-kernel schema change in v1.
 
@@ -23,7 +23,7 @@ Example project bridge:
 }
 ```
 
-Normative kernel contract: [font-manager-pairing](../../../../specs/symfinity/symfinity/2-ui-kernel/contracts/font-manager-pairing.md).
+Kernel `--ui-font-family-*` tokens expect a consumer bridge as shown above; see the **ui-kernel** handbook for theme token vocabulary.
 
 ## ui-themer convention
 

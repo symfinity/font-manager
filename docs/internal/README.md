@@ -7,6 +7,6 @@ This directory is **maintainer-only**. Files here are:
 
 Use for package-scoped runbooks (release checklists, port notes, drafts).
 
-**Org-wide** release trains and intake: `specs/symfinity/symfinity/intake/font-manager-intake.md` and `classified/explore/PRODUCT-split-release-wave-1.md`.
+Org-wide release trains and intake live in the private Symfinity planning repo — not in this split mirror.
 
-Normative: [docs-authoring](../../../../classified/policy/guidelines/docs-authoring.md#maintainer-only-docs-docsinternal).
+Normative maintainer policy: Symfinity org **docs-authoring** guideline (maintainer-only `docs/internal/` section).

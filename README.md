@@ -57,7 +57,7 @@ The Flex recipe registers the bundle for **dev** and **test** only. Enable **pro
 ## Documentation
 - **[Quickstart](docs/quickstart.md)** - Get started in 5 minutes
 - **[Installation](docs/installation.md)** - Flex, manual setup, production
-- **[Upgrade](docs/upgrade.md)** - Version migration (0.1 → 0.2, Symfinity relocation)
+- **[Upgrade](docs/upgrade.md)** - Version migration (0.2.3 config rename, Symfinity relocation)
 - **[Export Formats](docs/exports.md)** - Multi-format export guide (CSS, SCSS, Tailwind, TypeScript, Design Tokens)
 - **[Usage Guide](docs/usage.md)** - Function parameters and examples
 - **[Providers](docs/providers.md)** - Provider comparison and setup
