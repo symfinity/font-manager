@@ -127,10 +127,10 @@ Optional future recipe version **MAY** ship commented catalog examples.
 
 | File | Purpose |
 |------|---------|
-| `tests/Fixtures/Fonttrio/editorial.json` | Style registry snapshot (committed) |
-| `tests/Fixtures/Fonttrio/playfair-display.json` | Font dependency |
-| `tests/Fixtures/Fonttrio/source-serif-4.json` | Font dependency |
-| `tests/Fixtures/Fonttrio/jetbrains-mono.json` | Font dependency |
+| `tests/resources/fonttrio/editorial.json` | Style registry snapshot (committed) |
+| `tests/resources/fonttrio/playfair-display.json` | Font dependency |
+| `tests/resources/fonttrio/source-serif-4.json` | Font dependency |
+| `tests/resources/fonttrio/jetbrains-mono.json` | Font dependency |
 | `fixtures/font-recipe-dogfood/` | Extend M2 smoke: import editorial fixture → lock |
 
 Commit fixtures from live registry at implement time; record snapshot date in fixture README comment.

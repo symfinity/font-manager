@@ -7,6 +7,7 @@ namespace Symfinity\FontManager\Tests\Unit\Import;
 use Symfinity\FontManager\Exception\InvalidFonttrioRegistryException;
 use Symfinity\FontManager\Import\FonttrioPairingAdapter;
 use Symfinity\FontManager\Import\FonttrioRegistryClient;
+use Symfinity\FontManager\Tests\FonttrioTestFixtures;
 use PHPUnit\Framework\TestCase;
 
 final class FonttrioPairingAdapterTest extends TestCase
@@ -16,14 +17,14 @@ final class FonttrioPairingAdapterTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->fixtureDir = dirname(__DIR__, 2) . '/Fixtures/Fonttrio';
+        $this->fixtureDir = FonttrioTestFixtures::directory();
         $client = new FonttrioRegistryClient(null, $this->fixtureDir);
         $this->adapter = new FonttrioPairingAdapter($client);
     }
 
     public function testImportEditorialFixtureResolvesThreeFontsAndRoles(): void
     {
-        $result = $this->adapter->import($this->fixtureDir . '/editorial.json');
+        $result = $this->adapter->import(FonttrioTestFixtures::EDITORIAL_SOURCE);
 
         self::assertSame('editorial', $result->getId());
         self::assertCount(3, $result->getFonts());

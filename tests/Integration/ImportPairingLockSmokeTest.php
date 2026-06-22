@@ -8,16 +8,17 @@ use Symfinity\FontManager\Exporter\Css\CssVariablesExporter;
 use Symfinity\FontManager\Import\FonttrioPairingAdapter;
 use Symfinity\FontManager\Import\FonttrioRegistryClient;
 use Symfinity\FontManager\Import\PairingFontCollectionFactory;
+use Symfinity\FontManager\Tests\FonttrioTestFixtures;
 use PHPUnit\Framework\TestCase;
 
 final class ImportPairingLockSmokeTest extends TestCase
 {
     public function testImportThenExportEmitsOptionASemanticAliases(): void
     {
-        $fixtureDir = dirname(__DIR__) . '/Fixtures/Fonttrio';
+        $fixtureDir = FonttrioTestFixtures::directory();
         $client = new FonttrioRegistryClient(null, $fixtureDir);
         $adapter = new FonttrioPairingAdapter($client);
-        $result = $adapter->import($fixtureDir . '/editorial.json');
+        $result = $adapter->import(FonttrioTestFixtures::EDITORIAL_SOURCE);
 
         $collection = (new PairingFontCollectionFactory())->fromImportResult($result);
         $css = (new CssVariablesExporter())->export($collection);

@@ -1,0 +1,20 @@
+{
+  "name": "editorial",
+  "type": "registry:style",
+  "extends": "none",
+  "title": "Editorial — Playfair Display + Source Serif 4 + JetBrains Mono",
+  "description": "Classic editorial pairing. High-contrast serif headings with readable serif body text.",
+  "categories": ["serif", "editorial", "elegant"],
+  "registryDependencies": [
+    "https://www.fonttrio.xyz/r/playfair-display.json",
+    "https://www.fonttrio.xyz/r/source-serif-4.json",
+    "https://www.fonttrio.xyz/r/jetbrains-mono.json"
+  ],
+  "cssVars": {
+    "theme": {
+      "--font-heading": "var(--font-playfair-display)",
+      "--font-body": "var(--font-source-serif-4)",
+      "--font-mono": "var(--font-jetbrains-mono)"
+    }
+  }
+}

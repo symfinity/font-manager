@@ -9,6 +9,7 @@ use Symfinity\FontManager\Import\FontManagerConfigWriter;
 use Symfinity\FontManager\Import\FonttrioPairingAdapter;
 use Symfinity\FontManager\Import\FonttrioRegistryClient;
 use Symfinity\FontManager\Import\PairingConfigMerger;
+use Symfinity\FontManager\Tests\FonttrioTestFixtures;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
@@ -26,7 +27,7 @@ final class ImportPairingCommandTest extends TestCase
         $this->filesystem = new Filesystem();
         $this->tempDir = sys_get_temp_dir() . '/font-manager-import-' . uniqid();
         $this->filesystem->mkdir($this->tempDir . '/config/packages');
-        $this->fixtureDir = dirname(__DIR__, 2) . '/Fixtures/Fonttrio';
+        $this->fixtureDir = FonttrioTestFixtures::directory();
     }
 
     protected function tearDown(): void
@@ -38,7 +39,7 @@ final class ImportPairingCommandTest extends TestCase
     {
         $client = new FonttrioRegistryClient(null, $this->fixtureDir);
         $adapter = new FonttrioPairingAdapter($client);
-        $result = $adapter->import($this->fixtureDir . '/editorial.json');
+        $result = $adapter->import(FonttrioTestFixtures::EDITORIAL_SOURCE);
 
         $merged = (new PairingConfigMerger())->merge([], $result);
         (new FontManagerConfigWriter($this->filesystem))->write(
@@ -62,7 +63,7 @@ final class ImportPairingCommandTest extends TestCase
     public function testCommandWritesConfigFromFixtureSource(): void
     {
         $tester = new CommandTester($this->createCommand());
-        $exit = $tester->execute(['source' => $this->fixtureDir . '/editorial.json']);
+        $exit = $tester->execute(['source' => FonttrioTestFixtures::EDITORIAL_SOURCE]);
 
         self::assertSame(0, $exit);
         $configPath = $this->tempDir . '/config/packages/symfinity_font_manager.yaml';
@@ -84,7 +85,7 @@ final class ImportPairingCommandTest extends TestCase
     {
         $tester = new CommandTester($this->createCommand());
         $exit = $tester->execute([
-            'source' => $this->fixtureDir . '/editorial.json',
+            'source' => FonttrioTestFixtures::EDITORIAL_SOURCE,
             '--dry-run' => true,
         ]);
 
@@ -98,7 +99,7 @@ final class ImportPairingCommandTest extends TestCase
         $tester = new CommandTester($this->createCommand([
             'font_manager.pairings' => [
                 'catalog' => [
-                    'editorial' => ['source' => $this->fixtureDir . '/editorial.json'],
+                    'editorial' => ['source' => FonttrioTestFixtures::EDITORIAL_SOURCE],
                 ],
             ],
         ]));
