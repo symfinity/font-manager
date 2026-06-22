@@ -27,10 +27,6 @@ final class PairingFontCollectionFactory
         }
 
         foreach ($fontsConfig as $slug => $fontConfig) {
-            if (!is_array($fontConfig)) {
-                continue;
-            }
-
             $family = $fontConfig['family'] ?? $slug;
             if (!is_string($family)) {
                 continue;
@@ -48,13 +44,14 @@ final class PairingFontCollectionFactory
             $category = is_string($category) ? $category : null;
 
             $manifestEntry = $manifestFonts[$family] ?? $manifestFonts[$slug] ?? null;
-            $files = is_array($manifestEntry) && is_array($manifestEntry['files'] ?? null)
-                ? $manifestEntry['files']
-                : [];
+            $files = $this->normalizeFiles($manifestEntry);
 
             $collection->add(new Font(
                 name: $family,
-                weights: array_map('intval', $weights),
+                weights: array_map(
+                    static fn (mixed $weight): int => is_int($weight) ? $weight : (is_numeric($weight) ? (int) $weight : 400),
+                    $weights
+                ),
                 styles: ['normal'],
                 monospace: 'mono' === ($semanticBySlug[$slug] ?? null),
                 semantic: $semanticBySlug[$slug] ?? null,
@@ -75,5 +72,24 @@ final class PairingFontCollectionFactory
         }
 
         return $this->fromConfig($fontsConfig, $result->getRoles());
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    private function normalizeFiles(mixed $manifestEntry): array
+    {
+        if (!is_array($manifestEntry) || !is_array($manifestEntry['files'] ?? null)) {
+            return [];
+        }
+
+        $files = [];
+        foreach ($manifestEntry['files'] as $path => $file) {
+            if (is_string($path) && is_string($file)) {
+                $files[$path] = $file;
+            }
+        }
+
+        return $files;
     }
 }

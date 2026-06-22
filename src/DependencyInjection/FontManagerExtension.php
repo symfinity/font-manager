@@ -57,8 +57,11 @@ final class FontManagerExtension extends Extension
         $container->setParameter('font_manager.performance.prefer_variable_fonts', $config['performance']['prefer_variable_fonts'] ?? true);
         $container->setParameter('font_manager.performance.intelligent_fallbacks', $config['performance']['intelligent_fallbacks'] ?? true);
 
-        $container->setParameter('font_manager.fonts', $config['fonts'] ?? []);
-        $container->setParameter('font_manager.pairings', $config['pairings'] ?? []);
+        $fonts = $config['fonts'] ?? [];
+        $container->setParameter('font_manager.fonts', is_array($fonts) ? $fonts : []);
+
+        $pairings = $config['pairings'] ?? [];
+        $container->setParameter('font_manager.pairings', is_array($pairings) ? $pairings : []);
     }
 
     public function getAlias(): string

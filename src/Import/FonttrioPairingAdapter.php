@@ -165,13 +165,22 @@ final class FonttrioPairingAdapter implements FontPairingImportPort
     }
 
     /**
+     * @param array<string, mixed> $style
      * @param array<string, string> $variableToSlug
      *
      * @return array{body: string, heading: string, mono: string}
      */
     private function parseSemanticRoles(array $style, array $variableToSlug, string $pairingId): array
     {
-        $theme = $style['cssVars']['theme'] ?? null;
+        $cssVars = $style['cssVars'] ?? null;
+        if (!is_array($cssVars)) {
+            throw new InvalidFonttrioRegistryException(sprintf(
+                'Fonttrio pairing "%s" is missing cssVars.',
+                $pairingId
+            ));
+        }
+
+        $theme = $cssVars['theme'] ?? null;
         if (!is_array($theme)) {
             throw new InvalidFonttrioRegistryException(sprintf(
                 'Fonttrio pairing "%s" is missing cssVars.theme.',
@@ -213,13 +222,6 @@ final class FonttrioPairingAdapter implements FontPairingImportPort
             $roles[$role] = $variableToSlug[$variable];
         }
 
-        if (!isset($roles['body'])) {
-            throw new InvalidFonttrioRegistryException(sprintf(
-                'Fonttrio pairing "%s" requires a body role mapping.',
-                $pairingId
-            ));
-        }
-
         return [
             'body' => $roles['body'],
             'heading' => $roles['heading'] ?? $roles['body'],
@@ -251,7 +253,14 @@ final class FonttrioPairingAdapter implements FontPairingImportPort
 
         $normalized = [];
         foreach ($weights as $weight) {
-            $normalized[] = (int) $weight;
+            if (is_int($weight)) {
+                $normalized[] = $weight;
+                continue;
+            }
+
+            if (is_string($weight) && is_numeric($weight)) {
+                $normalized[] = (int) $weight;
+            }
         }
 
         $normalized = array_values(array_unique($normalized));

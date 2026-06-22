@@ -19,7 +19,14 @@ final class PairingConfigMerger
         }
 
         foreach ($result->getFonts() as $slug => $fontEntry) {
-            $fonts[$slug] = $this->mergeFontEntry($fonts[$slug] ?? null, $fontEntry);
+            $existingEntry = $fonts[$slug] ?? null;
+            $existingArray = null;
+            if (is_array($existingEntry)) {
+                /** @var array<string, mixed> $existingArray */
+                $existingArray = $existingEntry;
+            }
+
+            $fonts[$slug] = $this->mergeFontEntry($existingArray, $fontEntry);
         }
 
         $pairings = $existingConfig['pairings'] ?? [];
@@ -32,18 +39,19 @@ final class PairingConfigMerger
             $catalog = [];
         }
 
-        if (!isset($catalog[$result->getId()])) {
-            $catalog[$result->getId()] = [
-                'source' => '@fonttrio/' . $result->getId(),
+        $pairingId = $result->getId();
+        if (!isset($catalog[$pairingId]) || !is_array($catalog[$pairingId])) {
+            $catalog[$pairingId] = [
+                'source' => '@fonttrio/' . $pairingId,
             ];
         }
 
         if (null !== $result->getLabel()) {
-            $catalog[$result->getId()]['label'] = $result->getLabel();
+            $catalog[$pairingId]['label'] = $result->getLabel();
         }
 
         if ([] !== $result->getCategories()) {
-            $catalog[$result->getId()]['categories'] = $result->getCategories();
+            $catalog[$pairingId]['categories'] = $result->getCategories();
         }
 
         $pairings['catalog'] = $catalog;

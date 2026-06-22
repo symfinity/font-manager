@@ -188,9 +188,11 @@ final class FontsLockCommand extends Command
             && is_array($fontsConfig)
             && [] !== $fontsConfig
         ) {
-            $activeRoles = is_array($pairings['active_roles'] ?? null) ? $pairings['active_roles'] : [];
+            $normalizedFonts = $this->normalizeFontsConfig($fontsConfig);
+            $activeRoles = $this->normalizeActiveRoles($pairings['active_roles'] ?? null);
+            $normalizedManifest = $this->normalizeManifestFonts($manifestFonts);
 
-            return $this->pairingFontCollectionFactory->fromConfig($fontsConfig, $activeRoles, $manifestFonts);
+            return $this->pairingFontCollectionFactory->fromConfig($normalizedFonts, $activeRoles, $normalizedManifest);
         }
 
         $collection = new FontCollection();
@@ -214,5 +216,67 @@ final class FontsLockCommand extends Command
         }
 
         return $collection;
+    }
+
+    /**
+     * @param array<mixed, mixed> $fontsConfig
+     *
+     * @return array<string, array<string, mixed>>
+     */
+    private function normalizeFontsConfig(array $fontsConfig): array
+    {
+        $normalized = [];
+        foreach ($fontsConfig as $slug => $fontConfig) {
+            if (!is_string($slug) || !is_array($fontConfig)) {
+                continue;
+            }
+
+            /** @var array<string, mixed> $fontConfig */
+            $normalized[$slug] = $fontConfig;
+        }
+
+        /** @var array<string, array<string, mixed>> $normalized */
+        return $normalized;
+    }
+
+    /**
+     * @return array{body?: string, heading?: string, mono?: string}
+     */
+    private function normalizeActiveRoles(mixed $activeRoles): array
+    {
+        if (!is_array($activeRoles)) {
+            return [];
+        }
+
+        $normalized = [];
+        foreach (['body', 'heading', 'mono'] as $role) {
+            $slug = $activeRoles[$role] ?? null;
+            if (is_string($slug) && '' !== $slug) {
+                $normalized[$role] = $slug;
+            }
+        }
+
+        return $normalized;
+    }
+
+    /**
+     * @param array<string, mixed> $manifestFonts
+     *
+     * @return array<string, array<string, mixed>>
+     */
+    private function normalizeManifestFonts(array $manifestFonts): array
+    {
+        $normalized = [];
+        foreach ($manifestFonts as $key => $entry) {
+            if (!is_array($entry)) {
+                continue;
+            }
+
+            /** @var array<string, mixed> $entry */
+            $normalized[$key] = $entry;
+        }
+
+        /** @var array<string, array<string, mixed>> $normalized */
+        return $normalized;
     }
 }

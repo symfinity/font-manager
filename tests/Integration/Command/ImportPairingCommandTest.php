@@ -46,14 +46,17 @@ final class ImportPairingCommandTest extends TestCase
             $merged
         );
 
-        $parsed = Yaml::parseFile($this->tempDir . '/config/packages/symfinity_font_manager.yaml');
-        self::assertIsArray($parsed);
-        $fonts = $parsed['font_manager']['fonts'] ?? [];
+        $config = $this->readBundleConfig($this->tempDir . '/config/packages/symfinity_font_manager.yaml');
+        self::assertArrayHasKey('fonts', $config);
+        $fonts = $config['fonts'];
         self::assertIsArray($fonts);
         self::assertArrayHasKey('playfair-display', $fonts);
         self::assertArrayHasKey('source-serif-4', $fonts);
         self::assertArrayHasKey('jetbrains-mono', $fonts);
-        self::assertSame('editorial', $parsed['font_manager']['pairings']['active'] ?? null);
+        self::assertArrayHasKey('pairings', $config);
+        $pairings = $config['pairings'];
+        self::assertIsArray($pairings);
+        self::assertSame('editorial', $pairings['active'] ?? null);
     }
 
     public function testCommandWritesConfigFromFixtureSource(): void
@@ -65,9 +68,15 @@ final class ImportPairingCommandTest extends TestCase
         $configPath = $this->tempDir . '/config/packages/symfinity_font_manager.yaml';
         self::assertTrue($this->filesystem->exists($configPath));
 
-        $parsed = Yaml::parseFile($configPath);
-        self::assertSame('editorial', $parsed['font_manager']['pairings']['active'] ?? null);
-        self::assertCount(3, $parsed['font_manager']['fonts'] ?? []);
+        $config = $this->readBundleConfig($configPath);
+        self::assertArrayHasKey('pairings', $config);
+        $pairings = $config['pairings'];
+        self::assertIsArray($pairings);
+        self::assertSame('editorial', $pairings['active'] ?? null);
+        self::assertArrayHasKey('fonts', $config);
+        $fonts = $config['fonts'];
+        self::assertIsArray($fonts);
+        self::assertCount(3, $fonts);
         self::assertStringContainsString('editorial', $tester->getDisplay());
     }
 
@@ -96,8 +105,11 @@ final class ImportPairingCommandTest extends TestCase
         $exit = $tester->execute(['--all-catalog' => true]);
 
         self::assertSame(0, $exit);
-        $parsed = Yaml::parseFile($this->tempDir . '/config/packages/symfinity_font_manager.yaml');
-        self::assertArrayHasKey('playfair-display', $parsed['font_manager']['fonts'] ?? []);
+        $config = $this->readBundleConfig($this->tempDir . '/config/packages/symfinity_font_manager.yaml');
+        self::assertArrayHasKey('fonts', $config);
+        $fonts = $config['fonts'];
+        self::assertIsArray($fonts);
+        self::assertArrayHasKey('playfair-display', $fonts);
     }
 
     public function testCommandFailsWithoutSource(): void
@@ -123,5 +135,21 @@ final class ImportPairingCommandTest extends TestCase
             new ParameterBag($parameters),
             $this->tempDir,
         );
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function readBundleConfig(string $configPath): array
+    {
+        $parsed = Yaml::parseFile($configPath);
+        self::assertIsArray($parsed);
+        self::assertArrayHasKey(FontManagerConfigWriter::CONFIG_ROOT_KEY, $parsed);
+
+        $config = $parsed[FontManagerConfigWriter::CONFIG_ROOT_KEY];
+        self::assertIsArray($config);
+
+        /** @var array<string, mixed> $config */
+        return $config;
     }
 }

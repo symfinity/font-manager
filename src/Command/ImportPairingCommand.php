@@ -90,7 +90,7 @@ HELP
 
         if ($input->getOption('dry-run')) {
             $io->section('Dry run — merged config preview');
-            $io->writeln(Yaml::dump(['font_manager' => $merged], 6, 2));
+            $io->writeln(Yaml::dump([FontManagerConfigWriter::CONFIG_ROOT_KEY => $merged], 6, 2));
             $io->success(sprintf('Pairing "%s" parsed (%d fonts). No files written.', $result->getId(), count($result->getFonts())));
 
             return Command::SUCCESS;
@@ -124,9 +124,13 @@ HELP
             return $source;
         }
 
-        $catalog = $existingConfig['pairings']['catalog'] ?? [];
-        if (is_array($catalog) && isset($catalog[$source]['source']) && is_string($catalog[$source]['source'])) {
-            return $catalog[$source]['source'];
+        $catalog = $this->extractCatalog($existingConfig);
+
+        if (isset($catalog[$source])) {
+            $entrySource = $catalog[$source]['source'] ?? null;
+            if (is_string($entrySource)) {
+                return $entrySource;
+            }
         }
 
         if (!str_contains($source, '/') && !str_contains($source, '.')) {
@@ -141,15 +145,15 @@ HELP
      */
     private function importAllCatalog(SymfonyStyle $io, array $existingConfig, string $configPath, bool $dryRun): int
     {
-        $catalog = $existingConfig['pairings']['catalog'] ?? [];
-        if (!is_array($catalog) || [] === $catalog) {
+        $catalog = $this->extractCatalog($existingConfig);
+        if ([] === $catalog) {
             $pairingsParam = $this->params->get('font_manager.pairings');
             if (is_array($pairingsParam)) {
-                $catalog = $pairingsParam['catalog'] ?? [];
+                $catalog = $this->extractCatalog(['pairings' => $pairingsParam]);
             }
         }
 
-        if (!is_array($catalog) || [] === $catalog) {
+        if ([] === $catalog) {
             $io->error('No pairings.catalog entries configured.');
 
             return Command::FAILURE;
@@ -157,10 +161,6 @@ HELP
 
         $merged = $existingConfig;
         foreach ($catalog as $id => $entry) {
-            if (!is_array($entry)) {
-                continue;
-            }
-
             $source = $entry['source'] ?? null;
             if (!is_string($source)) {
                 $io->warning(sprintf('Skipping catalog entry "%s" — missing source.', (string) $id));
@@ -181,7 +181,7 @@ HELP
 
         if ($dryRun) {
             $io->section('Dry run — merged config preview');
-            $io->writeln(Yaml::dump(['font_manager' => $merged], 6, 2));
+            $io->writeln(Yaml::dump([FontManagerConfigWriter::CONFIG_ROOT_KEY => $merged], 6, 2));
 
             return Command::SUCCESS;
         }
@@ -190,5 +190,36 @@ HELP
         $io->success(sprintf('Imported %d catalog pairing(s).', count($catalog)));
 
         return Command::SUCCESS;
+    }
+
+    /**
+     * @param array<string, mixed> $config
+     *
+     * @return array<string, array<string, mixed>>
+     */
+    private function extractCatalog(array $config): array
+    {
+        $pairings = $config['pairings'] ?? null;
+        if (!is_array($pairings)) {
+            return [];
+        }
+
+        $catalog = $pairings['catalog'] ?? null;
+        if (!is_array($catalog)) {
+            return [];
+        }
+
+        $normalized = [];
+        foreach ($catalog as $id => $entry) {
+            if (!is_string($id) || !is_array($entry)) {
+                continue;
+            }
+
+            /** @var array<string, mixed> $entry */
+            $normalized[$id] = $entry;
+        }
+
+        /** @var array<string, array<string, mixed>> $normalized */
+        return $normalized;
     }
 }

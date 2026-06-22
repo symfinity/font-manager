@@ -14,7 +14,7 @@ final class FontManagerBundle extends Bundle
      * Org policy: config root is {@see symfinity_font_manager} (rule 22 triple alignment),
      * not Symfony's default underscored bundle name {@code font_manager}.
      */
-    public function getContainerExtension(): ?ExtensionInterface
+    public function getContainerExtension(): ExtensionInterface
     {
         return new FontManagerExtension();
     }

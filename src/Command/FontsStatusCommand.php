@@ -20,6 +20,7 @@ final class FontsStatusCommand extends Command
     public function __construct(
         private readonly string $manifestFile,
         private readonly Filesystem $filesystem,
+        /** @var array<string, mixed>|null */
         private readonly ?array $pairingsConfig = null,
     ) {
         parent::__construct();

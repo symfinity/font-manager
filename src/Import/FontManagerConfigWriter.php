@@ -9,6 +9,10 @@ use Symfony\Component\Yaml\Yaml;
 
 final class FontManagerConfigWriter
 {
+    public const CONFIG_ROOT_KEY = 'symfinity_font_manager';
+
+    private const LEGACY_CONFIG_ROOT_KEY = 'font_manager';
+
     public function __construct(
         private readonly Filesystem $filesystem,
     ) {
@@ -33,11 +37,12 @@ final class FontManagerConfigWriter
             return [];
         }
 
-        $config = $parsed['font_manager'] ?? [];
+        $config = $parsed[self::CONFIG_ROOT_KEY] ?? $parsed[self::LEGACY_CONFIG_ROOT_KEY] ?? null;
         if (!is_array($config)) {
             return [];
         }
 
+        /** @var array<string, mixed> $config */
         return $config;
     }
 
@@ -48,7 +53,7 @@ final class FontManagerConfigWriter
     {
         $this->filesystem->mkdir(dirname($configPath));
 
-        $yaml = Yaml::dump(['font_manager' => $config], 6, 2);
+        $yaml = Yaml::dump([self::CONFIG_ROOT_KEY => $config], 6, 2);
         $this->filesystem->dumpFile($configPath, $yaml);
     }
 }

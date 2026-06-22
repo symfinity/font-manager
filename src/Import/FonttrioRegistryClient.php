@@ -26,10 +26,10 @@ final class FonttrioRegistryClient
         private readonly ?string $fixtureDirectory = null,
         array $allowedHosts = self::DEFAULT_ALLOWED_HOSTS,
     ) {
-        $this->allowedHosts = array_values(array_map(
+        $this->allowedHosts = array_map(
             static fn (string $host): string => strtolower(trim($host)),
             $allowedHosts,
-        ));
+        );
     }
 
     /**
@@ -76,6 +76,7 @@ final class FonttrioRegistryClient
             ));
         }
 
+        /** @var array<string, mixed> $data */
         return $data;
     }
 
@@ -141,6 +142,7 @@ final class FonttrioRegistryClient
             throw new InvalidFonttrioRegistryException(sprintf('Invalid JSON in Fonttrio fixture: %s', $path));
         }
 
+        /** @var array<string, mixed> $data */
         return $data;
     }
 
@@ -154,7 +156,8 @@ final class FonttrioRegistryClient
             return null;
         }
 
-        $basename = basename(parse_url($url, PHP_URL_PATH) ?? '');
+        $path = parse_url($url, PHP_URL_PATH);
+        $basename = is_string($path) ? basename($path) : '';
         if ('' === $basename) {
             return null;
         }

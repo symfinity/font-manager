@@ -47,7 +47,11 @@ final class PairingsConfigurationTest extends TestCase
             ],
         ]]);
 
-        self::assertSame('editorial', $config['pairings']['active']);
-        self::assertSame('@fonttrio/editorial', $config['pairings']['catalog']['editorial']['source']);
+        self::assertIsArray($config['pairings']);
+        $pairings = $config['pairings'];
+        self::assertSame('editorial', $pairings['active']);
+        self::assertIsArray($pairings['catalog']);
+        self::assertIsArray($pairings['catalog']['editorial']);
+        self::assertSame('@fonttrio/editorial', $pairings['catalog']['editorial']['source']);
     }
 }
