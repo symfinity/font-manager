@@ -17,6 +17,7 @@ final class FontManagerBundleTest extends TestCase
         $extension = $bundle->getContainerExtension();
 
         self::assertInstanceOf(FontManagerExtension::class, $extension);
+        self::assertSame('symfinity_font_manager', $extension->getAlias());
     }
 
     public function testGetPath(): void

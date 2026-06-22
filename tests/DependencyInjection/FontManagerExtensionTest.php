@@ -31,15 +31,11 @@ final class FontManagerExtensionTest extends TestCase
         $container = new ContainerBuilder();
         $extension = new FontManagerExtension();
 
-        $config = [
-            'font_manager' => [
-                'default_provider' => 'bunny',
-                'cache_ttl' => 7200,
-                'use_locked_fonts' => true,
-            ],
-        ];
-
-        $extension->load($config, $container);
+        $extension->load([[
+            'default_provider' => 'bunny',
+            'cache_ttl' => 7200,
+            'use_locked_fonts' => true,
+        ]], $container);
 
         self::assertSame('bunny', $container->getParameter('font_manager.default_provider'));
         self::assertSame(7200, $container->getParameter('font_manager.cache_ttl'));
@@ -51,18 +47,14 @@ final class FontManagerExtensionTest extends TestCase
         $container = new ContainerBuilder();
         $extension = new FontManagerExtension();
 
-        $config = [
-            'font_manager' => [
-                'providers' => [
-                    'google' => ['enabled' => true, 'api_key' => 'test-key'],
-                    'bunny' => ['enabled' => true],
-                    'fontsource' => ['enabled' => true],
-                    'local' => ['enabled' => false],
-                ],
+        $extension->load([[
+            'providers' => [
+                'google' => ['enabled' => true, 'api_key' => 'test-key'],
+                'bunny' => ['enabled' => true],
+                'fontsource' => ['enabled' => true],
+                'local' => ['enabled' => false],
             ],
-        ];
-
-        $extension->load($config, $container);
+        ]], $container);
 
         $googleConfig = $container->getParameter('font_manager.providers.google');
         self::assertIsArray($googleConfig);
