@@ -1,6 +1,6 @@
 # Font manager ↔ UI Kernel pairing
 
-Cross-package typography alignment for Symfinity Chameleon / ui-kernel consumers.
+Cross-package typography alignment for Symfinity ui-kernel consumers.
 
 ## Option A (css_variables bridge)
 
