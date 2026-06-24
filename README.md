@@ -52,12 +52,12 @@ Add the [symfinity/recipes](https://github.com/symfinity/recipes) Flex endpoint 
 composer require symfinity/font-manager
 ```
 
-The Flex recipe registers the bundle for **dev** and **test** only. Enable **prod** manually before locking fonts — see [Installation](docs/installation.md).
+The Flex recipe registers the bundle for **all** environments. Run **`fonts:lock`** before deploy so production uses locked local assets — see [Installation](docs/installation.md).
 
 ## Documentation
 - **[Quickstart](docs/quickstart.md)** - Get started in 5 minutes
 - **[Installation](docs/installation.md)** - Flex, manual setup, production
-- **[Upgrade](docs/upgrade.md)** - Version migration (0.2.3 config rename, Symfinity relocation)
+- **[Upgrade](docs/upgrade.md)** - Version migration (0.2.4 Flex prod bundle, 0.2.3 config rename, Symfinity relocation)
 - **[Export Formats](docs/exports.md)** - Multi-format export guide (CSS, SCSS, Tailwind, TypeScript, Design Tokens)
 - **[Usage Guide](docs/usage.md)** - Function parameters and examples
 - **[Providers](docs/providers.md)** - Provider comparison and setup

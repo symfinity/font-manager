@@ -1,5 +1,21 @@
 # Upgrade and migration
 
+## 0.2.4
+
+**Flex recipe:** `FontManagerBundle` is registered for **all** environments (not dev/test only). Production layouts that call `font_manager()` no longer need a manual bundle step on fresh installs.
+
+If you installed before **0.2.4** and production still fails with an unknown Twig function, update `config/bundles.php`:
+
+```php
+Symfinity\FontManager\FontManagerBundle::class => ['all' => true],
+```
+
+Then run `fonts:lock` before deploy as usual. No namespace or config root key changes.
+
+```bash
+composer update symfinity/font-manager
+```
+
 ## 0.2.3
 
 **Configuration rename:** Symfony config root key `font_manager:` → `symfinity_font_manager:`; default file `config/packages/symfinity_font_manager.yaml`.

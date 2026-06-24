@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.4] - 2026-06-24
+
+### Fixed
+
+- Flex recipe registers `FontManagerBundle` for **all** environments so `font_manager()` and `fonts:lock` work in production after `composer require` (previously dev/test only)
+
+### Changed
+
+- Installation handbook and Flex post-install message aligned with production bundle registration and locked-font deploy flow
+
+### Notes
+
+- Projects installed before 0.2.4: set `FontManagerBundle::class => ['all' => true]` in `config/bundles.php` if production templates call `font_manager()` — see [docs/upgrade.md](docs/upgrade.md)
+
 ## [0.2.3] - 2026-06-22
 
 ### Changed
