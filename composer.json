@@ -79,6 +79,12 @@
             "require": "^6.4||^7.0||^8.0"
         }
     },
+    "funding": [
+        {
+            "type": "github",
+            "url": "https://github.com/sponsors/serotoninja"
+        }
+    ],
     "minimum-stability": "dev",
     "prefer-stable": true
 }

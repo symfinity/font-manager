@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.5] - 2026-06-29
+
+### Added
+
+- Public `ROADMAP.md` with 0.1.x–1.0.x milestone table
+- `SUPPORTERS.md` and `.github/FUNDING.yml` for GitHub Sponsors visibility
+- `composer.json` `funding` metadata pointing to [GitHub Sponsors](https://github.com/sponsors/serotoninja)
+
+### Changed
+
+- Split mirror CI: Composer package cache and `COMPOSER_AUTH` for reliable dependency installs
+
+### Notes
+
+- No functional or API changes — documentation, sponsorship metadata, and CI hygiene
+
 ## [0.2.4] - 2026-06-24
 
 ### Fixed
