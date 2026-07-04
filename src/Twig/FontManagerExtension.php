@@ -16,6 +16,10 @@ final class FontManagerExtension extends AbstractExtension
                 'is_safe' => ['html'],
                 'needs_runtime' => true,
             ]),
+            new TwigFunction('font_manager_ui_kernel_bridge', [FontManagerRuntime::class, 'renderUiKernelBridge'], [
+                'is_safe' => ['html'],
+                'needs_runtime' => true,
+            ]),
         ];
     }
 }

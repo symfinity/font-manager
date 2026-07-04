@@ -5,12 +5,20 @@
 {# templates/base.html.twig #}
 <head>
   {# Use default provider (Bunny Fonts recommended for privacy) #}
-  {{ font_manager('Ubuntu', '300 400 700', 'normal italic') }}
+  {{ font_manager('Ubuntu', '300 400 700', 'normal italic', false, 'swap') }}
   
-  {# Monospace font for code #}
-  {{ font_manager('JetBrains Mono', '400 500', 'normal', 'swap', true) }}
+  {# Monospace font for code (monospace arg before display) #}
+  {{ font_manager('JetBrains Mono', '400 500', 'normal', true, 'swap') }}
 </head>
 ```
+
+With **symfinity/ui-kernel**, enable `ui_kernel_bridge: true` and add after `ui_kernel_css()`:
+
+```twig
+{{ font_manager_ui_kernel_bridge()|raw }}
+```
+
+See [font-manager-kernel-pairing.md](font-manager-kernel-pairing.md).
 
 ### 2. Lock fonts for production
 ```bash

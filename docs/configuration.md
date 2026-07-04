@@ -116,6 +116,23 @@ symfinity_font_manager:
 
 **Note:** Automatically enabled in `prod` environment via `when@prod` configuration.
 
+#### `ui_kernel_bridge`
+
+**Type:** `boolean`  
+**Default:** `false`
+
+When `true` and **symfinity/ui-kernel** is installed, font-manager maps loaded fonts to kernel tokens:
+
+- Twig: call `{{ font_manager_ui_kernel_bridge()|raw }}` **after** `ui_kernel_css()`
+- Lock export: adds `--ui-font-family-sans/mono` to `fonts-variables.css`
+
+See [font-manager-kernel-pairing.md](font-manager-kernel-pairing.md).
+
+```yaml
+symfinity_font_manager:
+    ui_kernel_bridge: true
+```
+
 #### `fonts_dir`
 
 **Type:** `string`  

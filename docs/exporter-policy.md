@@ -27,7 +27,12 @@ Omitting a format from `export.formats` means it is **not** generated on `fonts:
 
 ## ui-kernel pairing
 
-When `symfinity/ui-kernel` is installed, consumers **may** align `css_variables` export names with `--ui-font-family-*` tokens. See ui-kernel `docs/font-manager-pairing.md` (when published in split). No automatic runtime coupling in v0.
+When `symfinity/ui-kernel` is installed, set **`ui_kernel_bridge: true`** in `symfinity_font_manager` config. Font-manager then:
+
+- emits **`font_manager_ui_kernel_bridge()`** Twig output mapping `--ui-font-family-*` after kernel CSS
+- adds `--ui-font-family-sans/mono` aliases in `fonts-variables.css` on `fonts:lock`
+
+See [font-manager-kernel-pairing.md](./font-manager-kernel-pairing.md) and ui-kernel `docs/font-manager-pairing.md`.
 
 ## Related
 

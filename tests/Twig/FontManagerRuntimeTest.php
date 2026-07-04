@@ -89,7 +89,7 @@ final class FontManagerRuntimeTest extends TestCase
 
         $runtime = new FontManagerRuntime($registry, false, null, $this->filesystem);
 
-        // New parameter order: name, weights, styles, monospace, provider, display
+        // Parameter order: name, weights, styles, monospace, display, provider
         $html = $runtime->renderFonts('JetBrains Mono', [400], ['normal'], true);
 
         self::assertStringContainsString('code', $html);
@@ -140,5 +140,31 @@ final class FontManagerRuntimeTest extends TestCase
 
         self::assertStringContainsString('/assets/fonts/roboto.css', $html);
         self::assertStringNotContainsString('googleapis', $html);
+    }
+
+    public function testRenderUiKernelBridgeAfterSansAndMonoFonts(): void
+    {
+        $httpClient = new MockHttpClient();
+        $googleProvider = new GoogleFontsProvider($httpClient);
+        $registry = new ProviderRegistry('google');
+        $registry->registerProvider($googleProvider);
+        $bridgeRegistry = new \Symfinity\FontManager\Service\UiKernelFontBridgeRegistry();
+
+        $runtime = new FontManagerRuntime(
+            $registry,
+            false,
+            null,
+            $this->filesystem,
+            uiKernelBridge: true,
+            uiKernelBridgeRegistry: $bridgeRegistry,
+        );
+
+        $runtime->renderFonts('Ubuntu', [400, 700], ['normal'], false, 'swap');
+        $runtime->renderFonts('Ubuntu Mono', [400], ['normal'], true, 'swap');
+
+        $bridge = $runtime->renderUiKernelBridge();
+
+        self::assertStringContainsString('--ui-font-family-sans:var(--font-family-ubuntu)', $bridge);
+        self::assertStringContainsString('--ui-font-family-mono:var(--font-family-ubuntu-mono)', $bridge);
     }
 }

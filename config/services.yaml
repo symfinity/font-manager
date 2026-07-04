@@ -53,6 +53,8 @@ services:
     Symfinity\FontManager\Twig\FontManagerExtension:
         tags: ['twig.extension']
 
+    Symfinity\FontManager\Service\UiKernelFontBridgeRegistry: ~
+
     Symfinity\FontManager\Twig\FontManagerRuntime:
         arguments:
             $providerRegistry: '@Symfinity\FontManager\Provider\ProviderRegistry'
@@ -65,6 +67,8 @@ services:
             $fontLoadingApi: '@Symfinity\FontManager\Service\Performance\FontLoadingApi'
             $enableResourceHints: '%font_manager.performance.resource_hints%'
             $enableIntelligentFallbacks: '%font_manager.performance.intelligent_fallbacks%'
+            $uiKernelBridge: '%font_manager.ui_kernel_bridge%'
+            $uiKernelBridgeRegistry: '@Symfinity\FontManager\Service\UiKernelFontBridgeRegistry'
         tags: ['twig.runtime']
 
     # Commands (explicit configuration for string parameters)

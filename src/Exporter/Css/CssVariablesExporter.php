@@ -78,6 +78,18 @@ final class CssVariablesExporter extends AbstractExporter
                     $headingFont->getCssVariableName()
                 );
             }
+
+            if (!empty($options['ui_kernel_bridge'])) {
+                $output .= "\n  /* UI Kernel token bridge (symfinity/ui-kernel) */\n";
+
+                if (null !== $sansFont) {
+                    $output .= "  --ui-font-family-sans: var(--font-family-sans);\n";
+                }
+
+                if (null !== $monoFont) {
+                    $output .= "  --ui-font-family-mono: var(--font-family-mono);\n";
+                }
+            }
         }
 
         // Font weights

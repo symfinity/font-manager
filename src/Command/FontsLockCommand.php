@@ -157,7 +157,10 @@ final class FontsLockCommand extends Command
                     $formats,
                     $this->projectDir,
                     $buildTool,
-                    true
+                    true,
+                    [
+                        'ui_kernel_bridge' => true === $this->params->get('font_manager.ui_kernel_bridge'),
+                    ]
                 );
 
                 $io->success(sprintf('Exported %d file(s)', count($results)));

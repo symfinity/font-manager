@@ -48,7 +48,7 @@ final class FontLockManager
             }
 
             // Match font_manager() function calls
-            // Pattern: font_manager('Font Name', 'weights', 'styles', 'display', monospace, 'provider')
+            // Pattern: font_manager('Font Name', 'weights', 'styles', monospace, 'display', 'provider')
             preg_match_all(
                 '/font_manager\s*\(\s*([^)]+)\)/',
                 (string) $content,

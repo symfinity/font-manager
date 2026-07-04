@@ -60,7 +60,7 @@ symfinity_font_manager:
 
 ```twig
 {# templates/base.html.twig #}
-{{ font_manager('BrandFont', '400 700', 'normal italic', 'swap', false, 'local') }}
+{{ font_manager('BrandFont', '400 700', 'normal italic', false, 'swap', 'local') }}
 ```
 
 ## Configuration Options
@@ -138,7 +138,7 @@ symfinity_font_manager:
 
 **Usage:**
 ```twig
-{{ font_manager('CorporateSerif', '400 700', 'normal italic', 'swap', false, 'local') }}
+{{ font_manager('CorporateSerif', '400 700', 'normal italic', false, 'swap', 'local') }}
 ```
 
 ## Validation
@@ -262,10 +262,10 @@ Mix local fonts with CDN fonts:
 
 ```twig
 {# Brand font (local) #}
-{{ font_manager('BrandFont', '400 700', 'normal', 'swap', false, 'local') }}
+{{ font_manager('BrandFont', '400 700', 'normal', false, 'swap', 'local') }}
 
 {# Body font (CDN) #}
-{{ font_manager('Inter', '400 600', 'normal', 'swap', false, 'bunny') }}
+{{ font_manager('Inter', '400 600', 'normal', false, 'swap', 'bunny') }}
 ```
 
 ## Troubleshooting
@@ -310,7 +310,7 @@ files:
 ### 1. Use font-display: swap
 
 ```twig
-{{ font_manager('BrandFont', '400', 'normal', 'swap') }}
+{{ font_manager('BrandFont', '400', 'normal', false, 'swap') }}
 ```
 
 Prevents FOIT (Flash of Invisible Text).

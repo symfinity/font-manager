@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.6] - 2026-07-05
+
+### Added
+
+- **`ui_kernel_bridge`** configuration option (default `false`) to map loaded fonts onto **symfinity/ui-kernel** tokens `--ui-font-family-sans` and `--ui-font-family-mono`
+- Twig function **`font_manager_ui_kernel_bridge()`** — emit an inline `@layer kernel.profile` bridge stylesheet after `ui_kernel_css()` in dev/CDN mode
+- Locked-font export: when the bridge is enabled, `fonts:lock` adds `--ui-font-family-sans/mono` aliases to `fonts-variables.css`
+- Handbook [font-manager-kernel-pairing.md](docs/font-manager-kernel-pairing.md) — template order, config, and pairing import workflow for ui-kernel consumers
+
+### Changed
+
+- Quickstart, configuration, and exporter-policy docs updated with ui-kernel pairing guidance
+
+### Notes
+
+- Opt-in only — font-manager does not require ui-kernel at runtime; enable `ui_kernel_bridge: true` when both packages are installed
+- No breaking changes for existing installs (bridge off by default)
+
 ## [0.2.5] - 2026-06-29
 
 ### Added

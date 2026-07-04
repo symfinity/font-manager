@@ -10,6 +10,7 @@ use Symfinity\FontManager\Provider\FontProviderInterface;
 use Symfinity\FontManager\Provider\ProviderRegistry;
 use Symfinity\FontManager\Service\Fallback\FontFallbackGenerator;
 use Symfinity\FontManager\Service\FontVariantHelper;
+use Symfinity\FontManager\Service\UiKernelFontBridgeRegistry;
 use Symfinity\FontManager\Service\Performance\FontLoadingApi;
 use Symfinity\FontManager\Service\Performance\FontPerformanceOptimizer;
 use Symfinity\FontManager\Service\VariableFonts\VariableFontDetector;
@@ -32,7 +33,9 @@ final class FontManagerRuntime implements RuntimeExtensionInterface
         private readonly ?VariableFontDetector $variableFontDetector = null,
         private readonly ?FontLoadingApi $fontLoadingApi = null,
         private readonly bool $enableResourceHints = true,
-        private readonly bool $enableIntelligentFallbacks = true
+        private readonly bool $enableIntelligentFallbacks = true,
+        private readonly bool $uiKernelBridge = false,
+        private readonly ?UiKernelFontBridgeRegistry $uiKernelBridgeRegistry = null,
     ) {
         // Properties $performanceOptimizer, $variableFontDetector, $fontLoadingApi, $enableResourceHints
         // are prepared for future 0.3.0 features (resource hints rendering, variable font detection, etc.)
@@ -115,6 +118,10 @@ final class FontManagerRuntime implements RuntimeExtensionInterface
         $inlineStyles = $this->generateInlineStyles($fontVar, $name, $defaultWeight, $headingWeight, $boldWeight, $monospace);
         $parts[] = sprintf('<style>%s</style>', $inlineStyles);
 
+        if ($this->uiKernelBridge && null !== $this->uiKernelBridgeRegistry) {
+            $this->uiKernelBridgeRegistry->register($fontVar, $monospace);
+        }
+
         return implode("\n", $parts);
     }
 
@@ -172,6 +179,15 @@ final class FontManagerRuntime implements RuntimeExtensionInterface
         }
 
         return $css;
+    }
+
+    public function renderUiKernelBridge(): string
+    {
+        if (!$this->uiKernelBridge || null === $this->uiKernelBridgeRegistry) {
+            return '';
+        }
+
+        return $this->uiKernelBridgeRegistry->renderBridgeStylesheet();
     }
 
     /**

@@ -12,10 +12,10 @@
 {{ font_manager('Ubuntu', '300 400 500 700', 'normal italic') }}
 
 {# Monospace font for code elements #}
-{{ font_manager('JetBrains Mono', '400 500', 'normal', 'swap', true) }}
+{{ font_manager('JetBrains Mono', '400 500', 'normal', true, 'swap') }}
 
 {# Specify provider explicitly #}
-{{ font_manager('Open Sans', '400 700', 'normal', 'swap', false, 'bunny') }}
+{{ font_manager('Open Sans', '400 700', 'normal', false, 'swap', 'bunny') }}
 ```
 
 ### Parameters
@@ -25,11 +25,13 @@ font_manager(
     name,         # Font family name (required)
     weights,      # '400 700' or [400, 700] (optional, default: '400')
     styles,       # 'normal italic' or ['normal', 'italic'] (optional, default: 'normal')
-    display,      # 'swap' | 'block' | 'fallback' | 'optional' (optional, default: 'swap')
     monospace,    # true | false (optional, default: false)
+    display,      # 'swap' | 'block' | 'fallback' | 'optional' (optional, default: 'swap')
     provider      # 'google' | 'bunny' | 'local' (optional, default: configured default)
 )
 ```
+
+> **Parameter order:** `monospace` comes **before** `display`. Older docs and Google Fonts migration snippets sometimes reversed these — that silently mis-assigns sans fonts as monospace.
 
 ## Provider-Specific Usage
 
@@ -37,7 +39,7 @@ font_manager(
 
 ```twig
 {# Standard usage #}
-{{ font_manager('Roboto', '400 700', 'normal', 'swap', false, 'google') }}
+{{ font_manager('Roboto', '400 700', 'normal', false, 'swap', 'google') }}
 ```
 
 **Features:**
@@ -50,7 +52,7 @@ font_manager(
 
 ```twig
 {# Privacy-friendly, GDPR compliant #}
-{{ font_manager('Roboto', '400 700', 'normal', 'swap', false, 'bunny') }}
+{{ font_manager('Roboto', '400 700', 'normal', false, 'swap', 'bunny') }}
 ```
 
 **Features:**
@@ -64,7 +66,7 @@ font_manager(
 
 ```twig
 {# Version-controlled via npm packages #}
-{{ font_manager('Poppins', '400 700', 'normal', 'swap', false, 'fontsource') }}
+{{ font_manager('Poppins', '400 700', 'normal', false, 'swap', 'fontsource') }}
 ```
 
 **Features:**
@@ -79,7 +81,7 @@ font_manager(
 
 ```twig
 {# Custom brand fonts #}
-{{ font_manager('CorporateSerif', '400 700', 'normal italic', 'swap', false, 'local') }}
+{{ font_manager('CorporateSerif', '400 700', 'normal italic', false, 'swap', 'local') }}
 ```
 
 **Configuration Required:**
@@ -123,7 +125,7 @@ symfinity_font_manager:
 ### Monospace for Code
 ```twig
 {# Code/mono font #}
-{{ font_manager('Fira Code', '400 500 700', 'normal', 'swap', true) }}
+{{ font_manager('Fira Code', '400 500 700', 'normal', true, 'swap') }}
 
 <pre><code>
 function hello() {
@@ -141,7 +143,7 @@ function hello() {
 {{ font_manager('Open Sans', '300 400 600', 'normal italic') }}
 
 {# Code blocks #}
-{{ font_manager('JetBrains Mono', '400 500', 'normal', 'swap', true) }}
+{{ font_manager('JetBrains Mono', '400 500', 'normal', true, 'swap') }}
 ```
 
 ## Development vs Production

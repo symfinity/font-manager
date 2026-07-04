@@ -1,3 +1,7 @@
+---
+integration_profile: P1
+---
+
 # Overview
 
 Handbook for **symfinity/font-manager** — multi-provider font loading, locking, and export for Symfony.
@@ -16,4 +20,5 @@ Handbook for **symfinity/font-manager** — multi-provider font loading, locking
 - [Migration from google-fonts](migration-from-google-fonts.md)
 - [Performance](performance.md)
 - [Exporter Policy](exporter-policy.md)
+- [UI Kernel pairing](font-manager-kernel-pairing.md)
 - [Upgrade](upgrade.md)

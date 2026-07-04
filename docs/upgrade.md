@@ -1,5 +1,22 @@
 # Upgrade and migration
 
+## 0.2.6
+
+**UI Kernel bridge (optional):** New config flag `ui_kernel_bridge` (default `false`). When **symfinity/ui-kernel** is installed, set it to `true` and call `{{ font_manager_ui_kernel_bridge()|raw }}` after `ui_kernel_css()` so UX Blocks and kernel tokens use your loaded webfonts instead of system stacks.
+
+```yaml
+symfinity_font_manager:
+    ui_kernel_bridge: true
+```
+
+After enabling, re-run `fonts:lock` so production `fonts-variables.css` includes `--ui-font-family-sans/mono` aliases.
+
+No namespace, config root key, or Twig function renames — see [font-manager-kernel-pairing.md](font-manager-kernel-pairing.md).
+
+```bash
+composer update symfinity/font-manager
+```
+
 ## 0.2.4
 
 **Flex recipe:** `FontManagerBundle` is registered for **all** environments (not dev/test only). Production layouts that call `font_manager()` no longer need a manual bundle step on fresh installs.

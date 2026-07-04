@@ -70,6 +70,19 @@ final class CssVariablesExporterTest extends TestCase
         $this->assertStringContainsString('--font-family-mono:', $output);
     }
 
+    public function testExportUiKernelBridgeAliasesWhenEnabled(): void
+    {
+        $fonts = [
+            new Font('Ubuntu', [400, 700], ['normal'], false, 'sans'),
+            new Font('JetBrains Mono', [400, 500], ['normal'], true, 'mono'),
+        ];
+
+        $output = $this->exporter->export(new FontCollection($fonts), ['ui_kernel_bridge' => true]);
+
+        $this->assertStringContainsString('--ui-font-family-sans: var(--font-family-sans);', $output);
+        $this->assertStringContainsString('--ui-font-family-mono: var(--font-family-mono);', $output);
+    }
+
     public function testExportIncludesHeader(): void
     {
         $font = new Font('Ubuntu', [400], ['normal'], false, 'sans');

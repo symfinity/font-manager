@@ -29,7 +29,7 @@ symfinity_font_manager:
 
 **Usage:**
 ```twig
-{{ font_manager('Roboto', '400 700', 'normal', 'swap', false, 'google') }}
+{{ font_manager('Roboto', '400 700', 'normal', false, 'swap', 'google') }}
 ```
 
 ---
@@ -61,7 +61,7 @@ symfinity_font_manager:
 
 **Usage:**
 ```twig
-{{ font_manager('Roboto', '400 700', 'normal', 'swap', false, 'bunny') }}
+{{ font_manager('Roboto', '400 700', 'normal', false, 'swap', 'bunny') }}
 ```
 
 **Workflow:**
@@ -97,7 +97,7 @@ symfinity_font_manager:
 
 **Usage:**
 ```twig
-{{ font_manager('Roboto', '400 700', 'normal', 'swap', false, 'fontsource') }}
+{{ font_manager('Roboto', '400 700', 'normal', false, 'swap', 'fontsource') }}
 ```
 
 **How it works:**
@@ -158,7 +158,7 @@ assets/fonts/custom/
 
 **Usage:**
 ```twig
-{{ font_manager('CorporateSerif', '400 700', 'normal italic', 'swap', false, 'local') }}
+{{ font_manager('CorporateSerif', '400 700', 'normal italic', false, 'swap', 'local') }}
 ```
 
 **Validate Files:**
@@ -199,16 +199,16 @@ symfinity_font_manager:
 
 ```twig
 {# Headings: Google Fonts (lots of choices) #}
-{{ font_manager('Poppins', '600 700', 'normal', 'swap', false, 'google') }}
+{{ font_manager('Poppins', '600 700', 'normal', false, 'swap', 'google') }}
 
 {# Body: Bunny Fonts (privacy) #}
-{{ font_manager('Inter', '400 600', 'normal italic', 'swap', false, 'bunny') }}
+{{ font_manager('Inter', '400 600', 'normal italic', false, 'swap', 'bunny') }}
 
 {# UI: Fontsource (version-controlled) #}
-{{ font_manager('Poppins', '400 600', 'normal', 'swap', false, 'fontsource') }}
+{{ font_manager('Poppins', '400 600', 'normal', false, 'swap', 'fontsource') }}
 
 {# Branding: Local (custom font) #}
-{{ font_manager('BrandFont', '400 700', 'normal', 'swap', false, 'local') }}
+{{ font_manager('BrandFont', '400 700', 'normal', false, 'swap', 'local') }}
 ```
 
 ## Best Practices
