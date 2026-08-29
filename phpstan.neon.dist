@@ -1,0 +1,19 @@
+includes:
+    - vendor/phpstan/phpstan-symfony/extension.neon
+    - phpstan-baseline.neon
+
+parameters:
+    level: max
+    paths:
+        - src
+        - tests
+    
+    # Ignore specific errors if needed
+    ignoreErrors:
+        # Properties prepared for future 0.3.0 features (will be used in subsequent commits)
+        - '#Property Symfinity\\FontManager\\Twig\\FontManagerRuntime::\$performanceOptimizer is never read#'
+        - '#Property Symfinity\\FontManager\\Twig\\FontManagerRuntime::\$variableFontDetector is never read#'
+        - '#Property Symfinity\\FontManager\\Twig\\FontManagerRuntime::\$fontLoadingApi is never read#'
+        - '#Property Symfinity\\FontManager\\Twig\\FontManagerRuntime::\$enableResourceHints is never read#'
+    
+    reportUnmatchedIgnoredErrors: false
