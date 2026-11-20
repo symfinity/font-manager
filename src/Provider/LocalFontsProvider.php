@@ -241,7 +241,7 @@ final class LocalFontsProvider extends AbstractProvider
     /**
      * Build variant list from font configuration.
      *
-     * @param array<string, mixed> $fontConfig
+     * @param array<mixed, mixed> $fontConfig
      *
      * @return array<string>
      */

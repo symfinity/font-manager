@@ -301,12 +301,6 @@ parameters:
 			path: src/Provider/LocalFontsProvider.php
 
 		-
-			message: '#^Parameter \#1 \$fontConfig of method Symfinity\\FontManager\\Provider\\LocalFontsProvider\:\:buildVariantList\(\) expects array\<string, mixed\>, array\<mixed\> given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Provider/LocalFontsProvider.php
-
-		-
 			message: '#^Call to function method_exists\(\) with Symfony\\Component\\Filesystem\\Filesystem and ''readFile'' will always evaluate to true\.$#'
 			identifier: function.alreadyNarrowedType
 			count: 1
